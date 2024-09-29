@@ -20,7 +20,7 @@ export default function SignUpPage() {
 
   return (
     <PageTitle title='Signup'>
-      <main className='mt-20'>
+      <main className='flex min-h-screen items-center justify-center'>
         <Card className='mx-auto w-full max-w-md'>
           <CardHeader>
             <CardTitle className='mb-2'>Hi There 👋!</CardTitle>
