@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { NextAuthProviders } from '@/providers/NextAuthProviders';
 import { Poppins } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import { Toaster } from 'sonner';
@@ -16,8 +17,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='en' className='dark'>
       <body className={`${font.className} antialiased`}>
-        {children}
-        <Toaster richColors duration={3000} theme='dark' />
+        <NextAuthProviders>
+          {children}
+          <Toaster richColors duration={3000} theme='dark' />
+        </NextAuthProviders>
       </body>
     </html>
   );

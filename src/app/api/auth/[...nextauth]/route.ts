@@ -1,10 +1,20 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import NextAuth from 'next-auth';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-import { NextAuthOptions } from 'next-auth';
 import { graphQlServerConnector } from '@/helpers';
 import { GET_USER_BY_EMAIL } from '@/lib/queries';
+import { NextAuthOptions } from 'next-auth';
+import { NEXTAUTH_SECRET } from '@/config';
+import { JWT } from 'next-auth/jwt';
+
+// so that we can use accessToken in session
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string;
+  }
+}
 
 const authOption: NextAuthOptions = {
   session: { strategy: 'jwt' },
@@ -47,15 +57,43 @@ const authOption: NextAuthOptions = {
       },
     }),
   ],
-  callbacks: {
-    async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith('/')) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+  jwt: {
+    encode({ secret, token }) {
+      const encodedToken = jwt.sign(token!, secret, { algorithm: 'HS256' });
+      return encodedToken;
+    },
+    decode({ secret, token }) {
+      const decodedToken = jwt.verify(token!, secret);
+      return decodedToken as JWT;
     },
   },
+  callbacks: {
+    async jwt({ token }) {
+      return {
+        ...token,
+        ['https://hasura.io/jwt/claims']: {
+          ['x-hasura-allowed-roles']: ['user'],
+          ['x-hasura-default-role']: 'user',
+          ['x-hasura-role']: 'user',
+          ['x-hasura-user-email']: token.email,
+        },
+      };
+    },
+
+    session({ session, token }) {
+      if (session.user) {
+        session.user.email = token.email;
+        session.user.name = token.name;
+      }
+
+      session.accessToken = jwt.sign(token, NEXTAUTH_SECRET!, {
+        algorithm: 'HS256',
+      });
+
+      return session;
+    },
+  },
+
   pages: {
     signIn: '/login',
     error: '/login',
