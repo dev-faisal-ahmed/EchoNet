@@ -6,3 +6,22 @@ export const SING_UP_MUTATION = `
   }
 }
 `;
+
+export const SINGUP_ACTION = `
+  mutation SignUpAction(
+    $name:String!, 
+    $email:String!, 
+    $password:String!
+    $apiSecret:String!
+  ) {
+    SignupAction(
+      name:$name, 
+      email:$email, 
+      password:$password,
+      apiSecret:$apiSecret,
+    ) {
+      success,
+      message
+    }
+  }
+`;

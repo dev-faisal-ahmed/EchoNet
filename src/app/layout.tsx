@@ -1,6 +1,8 @@
+import type { Metadata } from 'next';
+
 import { Poppins } from 'next/font/google';
 import { PropsWithChildren } from 'react';
-import type { Metadata } from 'next';
+import { Toaster } from 'sonner';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,7 +15,10 @@ const font = Poppins({ subsets: ['latin'], weight: ['400', '600'] });
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='en' className='dark'>
-      <body className={`${font.className} antialiased`}>{children}</body>
+      <body className={`${font.className} antialiased`}>
+        {children}
+        <Toaster richColors duration={3000} theme='dark' />
+      </body>
     </html>
   );
 }

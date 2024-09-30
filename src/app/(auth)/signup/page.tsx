@@ -4,7 +4,6 @@ import {
   CardDescription,
   CardContent,
   CardHeader,
-  CardTitle,
   Card,
 } from '@/components/ui/card';
 
@@ -12,19 +11,22 @@ import { PasswordInput } from '@/components/shared/form/PasswordInput';
 import { TextInput } from '@/components/shared/form/TextInput';
 import { PageTitle } from '@/components/shared/PageTitle';
 import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/shared/Logo';
 import { useSignup } from './(lib)/useSignup';
 import { Form } from '@/components/ui/form';
 
 export default function SignUpPage() {
-  const { form, handleSignup } = useSignup();
+  const { form, handleSignup, isLoading } = useSignup();
 
   return (
     <PageTitle title='Signup'>
       <main className='flex min-h-screen items-center justify-center'>
         <Card className='mx-auto w-full max-w-md'>
-          <CardHeader>
-            <CardTitle className='mb-2'>Hi There 👋!</CardTitle>
-            <CardDescription>Provide your information below</CardDescription>
+          <CardHeader className='text-center'>
+            <Logo className='mx-auto mb-3' />
+            <CardDescription>
+              Please, provide your information below
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -49,7 +51,13 @@ export default function SignUpPage() {
                   control={form.control}
                   placeholder='Confirm Password'
                 />
-                <Button type='submit'>Signup</Button>
+                <Button
+                  disabled={isLoading}
+                  className='mx-auto mt-2 w-2/3'
+                  type='submit'
+                >
+                  SignUp
+                </Button>
               </form>
             </Form>
           </CardContent>
