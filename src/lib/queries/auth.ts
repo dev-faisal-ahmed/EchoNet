@@ -25,3 +25,13 @@ export const SINGUP_ACTION = `
     }
   }
 `;
+
+export const GET_USER_BY_EMAIL = `
+  query GetUserByEmail ($email:String!) {
+    users_by_pk(email:$email) {
+      email, 
+      name, 
+      password
+    }  
+  }
+`;

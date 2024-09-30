@@ -1,9 +1,9 @@
 import { axiosInstanceForServer } from './axiosInstanceForServer';
 
-export async function graphQlServerConnector(
+export const graphQlServerConnector = async (
   query: string,
   variables: Record<string, unknown> = {},
-) {
+) => {
   try {
     const response = await axiosInstanceForServer.post('', {
       query,
@@ -15,4 +15,4 @@ export async function graphQlServerConnector(
     if (error instanceof Error) message = error.message;
     throw new Error(message);
   }
-}
+};

@@ -10,11 +10,11 @@ interface SingupActionArgs {
   password: string;
 }
 
-export async function singupAction({
+export const singupAction = async ({
   name,
   email,
   password,
-}: SingupActionArgs) {
+}: SingupActionArgs) => {
   const response = await graphQlServerConnector(SINGUP_ACTION, {
     name,
     email,
@@ -23,4 +23,4 @@ export async function singupAction({
   });
 
   return response?.data;
-}
+};

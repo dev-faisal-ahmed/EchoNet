@@ -1,10 +1,10 @@
 import { axiosInstance } from './axiosInstance';
 import { catchAsync } from '../catchAsync';
 
-export async function graphQlClient(
+export const graphQlClient = async (
   query: string,
   variables: Record<string, unknown>,
-) {
+) => {
   const body = {
     query,
     variables: variables || {},
@@ -20,4 +20,4 @@ export async function graphQlClient(
       throw new Error(message);
     },
   });
-}
+};

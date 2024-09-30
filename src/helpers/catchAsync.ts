@@ -7,12 +7,12 @@ interface CatchAsyncArgs {
   finallyFn?: () => void;
 }
 
-export async function catchAsync({
+export const catchAsync = async ({
   finallyFn,
   catchFn,
   tryFn,
   id,
-}: CatchAsyncArgs) {
+}: CatchAsyncArgs) => {
   return Promise.resolve(tryFn())
     .catch((error) => {
       if (catchFn) return catchFn(error);
@@ -25,4 +25,4 @@ export async function catchAsync({
     .finally(() => {
       if (finallyFn) return finallyFn();
     });
-}
+};
