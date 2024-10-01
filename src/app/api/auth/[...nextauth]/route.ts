@@ -59,7 +59,6 @@ const authOption: NextAuthOptions = {
   ],
   jwt: {
     encode({ secret, token }) {
-      console.log(secret);
       const encodedToken = jwt.sign(token!, secret, { algorithm: 'HS256' });
       return encodedToken;
     },

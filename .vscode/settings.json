@@ -4,6 +4,7 @@
     "hookform",
     "NEXTAUTH",
     "Signup",
-    "sonner"
+    "sonner",
+    "Topbar"
   ]
 }

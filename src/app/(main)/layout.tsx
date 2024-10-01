@@ -5,6 +5,7 @@ import { PropsWithChildren, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Sidebar } from './_ui/Sidebar';
+import { Topbar } from './_ui/Topbar';
 
 export default function MainLayout({ children }: PropsWithChildren) {
   const session = useSession();
@@ -20,7 +21,10 @@ export default function MainLayout({ children }: PropsWithChildren) {
   return (
     <main className='flex gap-6'>
       <Sidebar className='hidden md:grid' />
-      <main>{children}</main>
+      <main className='w-full px-6 py-6'>
+        <Topbar />
+        {children}
+      </main>
     </main>
   );
 }
