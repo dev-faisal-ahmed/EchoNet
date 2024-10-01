@@ -1,5 +1,7 @@
-import { HASURA_API_URL } from '@/config';
 import axios from 'axios';
+
+import { getSession } from 'next-auth/react';
+import { HASURA_API_URL } from '@/config';
 
 export const axiosInstance = axios.create({
   baseURL: HASURA_API_URL,
@@ -9,7 +11,12 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  async (config) => config,
+  async (config) => {
+    const session = await getSession();
+    const token = session?.accessToken;
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  },
   (error) => Promise.reject(error),
 );
 

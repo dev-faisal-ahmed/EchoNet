@@ -1,12 +1,6 @@
 {
-  "plugins": [
-    "prettier-plugin-tailwindcss"
-  ],
-  "tailwindFunctions": [
-    "clsx",
-    "cva",
-    "cn"
-  ],
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindFunctions": ["clsx", "cva", "cn"],
   "singleQuote": true,
   "jsxSingleQuote": true
 }
