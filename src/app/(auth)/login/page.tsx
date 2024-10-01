@@ -13,7 +13,8 @@ import { PageTitle } from '@/components/shared/PageTitle';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/shared/Logo';
 import { Form } from '@/components/ui/form';
-import { useLogin } from './(lib)/useLogin';
+import { useLogin } from './_lib/useLogin';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const { form, handleLogin, isLoading } = useLogin();
@@ -48,6 +49,12 @@ export default function LoginPage() {
                 >
                   Login
                 </Button>
+                <p className='text-center text-sm text-muted-foreground'>
+                  New Here?{' '}
+                  <Link className='text-blue-500' href='/signup'>
+                    Signup
+                  </Link>
+                </p>
               </form>
             </Form>
           </CardContent>

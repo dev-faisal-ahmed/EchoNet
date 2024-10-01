@@ -12,8 +12,9 @@ import { TextInput } from '@/components/shared/form/TextInput';
 import { PageTitle } from '@/components/shared/PageTitle';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/shared/Logo';
-import { useSignup } from './(lib)/useSignup';
+import { useSignup } from './_lib/useSignup';
 import { Form } from '@/components/ui/form';
+import Link from 'next/link';
 
 export default function SignUpPage() {
   const { form, handleSignup, isLoading } = useSignup();
@@ -58,6 +59,12 @@ export default function SignUpPage() {
                 >
                   SignUp
                 </Button>
+                <p className='text-center text-sm text-muted-foreground'>
+                  Already have an account?{' '}
+                  <Link className='text-blue-500' href='/login'>
+                    Login
+                  </Link>
+                </p>
               </form>
             </Form>
           </CardContent>
