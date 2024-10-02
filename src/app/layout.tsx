@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { TanStackQueryClientProvider } from '@/providers/QueryClient';
 import { NextAuthProviders } from '@/providers/NextAuthProviders';
 import { Poppins } from 'next/font/google';
 import { PropsWithChildren } from 'react';
@@ -18,8 +19,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang='en' className='dark'>
       <body className={`${font.className} antialiased`}>
         <NextAuthProviders>
-          {children}
-          <Toaster richColors duration={3000} theme='dark' />
+          <TanStackQueryClientProvider>
+            {children}
+            <Toaster richColors duration={3000} theme='dark' />
+          </TanStackQueryClientProvider>
         </NextAuthProviders>
       </body>
     </html>

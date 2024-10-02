@@ -8,15 +8,16 @@ import {
 } from 'lucide-react';
 
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
 import { CustomTextArea } from '@/components/shared/form/CustomTextArea';
+import { CustomSelect } from '@/components/shared/form/CustomSelect';
 import { ImageInput } from '@/components/shared/form/ImageInput';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { Card, CardContent } from '@/components/ui/card';
@@ -27,20 +28,28 @@ import { Form } from '@/components/ui/form';
 
 export function AddPost() {
   const user = useGetUser();
-  const { form, handleAddPost, imageRef, onImageRemove } = useAddPost();
+  const {
+    form,
+    imageRef,
+    states: { isDialogOpen, setIsDialogOpen },
+    handlers: { handleAddPost, onImageRemove },
+  } = useAddPost();
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
         <Card className='cursor-pointer'>
           <CardContent className='pt-6'>
             <div className='flex items-center gap-4'>
-              <ProfileIcon name={user?.name as string} />
+              {/* using addition div to prevent from shrinking profile icon */}
+              <div>
+                <ProfileIcon name={user?.name as string} />
+              </div>
               <div className='h-full w-full rounded-full bg-border p-3 pl-4'>
                 What&apos;s on your mind?
               </div>
             </div>
-            <div className='mt-6 flex items-center gap-6'>
+            <div className='mt-6 flex flex-wrap items-center gap-6'>
               <p className='flex items-center gap-2'>
                 <ImageIcon size={20} /> Image
               </p>
@@ -57,15 +66,26 @@ export function AddPost() {
             </div>
           </CardContent>
         </Card>
-      </SheetTrigger>
-      <SheetContent className='max-w-lg'>
-        <SheetHeader>
-          <SheetTitle>Add Post</SheetTitle>
-          <SheetDescription>Tell us what&apos;s on your mind</SheetDescription>
-        </SheetHeader>
+      </DialogTrigger>
+      <DialogContent className='max-w-lg'>
+        <DialogHeader>
+          <DialogTitle className='mb-1'>Add Post</DialogTitle>
+          <DialogDescription>
+            Tell us what&apos;s on your mind
+          </DialogDescription>
+        </DialogHeader>
 
         <Form {...form}>
-          <form className='mt-8 flex flex-col gap-3' onSubmit={handleAddPost}>
+          <form
+            className='flex max-h-[400px] flex-col gap-3 overflow-y-auto py-2 pl-2 pr-4'
+            onSubmit={handleAddPost}
+          >
+            <CustomSelect
+              name='privacy'
+              control={form.control}
+              placeholder='Select Privacy Type'
+              options={['PUBLIC', 'ONLY_ME']}
+            />
             <CustomTextArea
               name='body'
               control={form.control}
@@ -76,7 +96,7 @@ export function AddPost() {
             <Button className='mt-6'>Post</Button>
           </form>
         </Form>
-      </SheetContent>
-    </Sheet>
+      </DialogContent>
+    </Dialog>
   );
 }

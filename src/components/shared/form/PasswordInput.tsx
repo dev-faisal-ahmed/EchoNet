@@ -12,12 +12,12 @@ import { InputHTMLAttributes, useState } from 'react';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
-interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   control: any;
 }
 
-export function PasswordInput({ name, control, ...props }: PasswordInputProps) {
+export function PasswordInput({ name, control, ...props }: IProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (

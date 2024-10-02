@@ -11,12 +11,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { InputHTMLAttributes } from 'react';
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   control: any;
 }
 
-export function TextInput({ name, control, ...props }: TextInputProps) {
+export function TextInput({ name, control, ...props }: IProps) {
   return (
     <FormField
       control={control}
