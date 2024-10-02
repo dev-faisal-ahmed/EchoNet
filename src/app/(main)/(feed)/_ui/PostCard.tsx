@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export function PostCard({ creator, createdAt, body, imageUrl }: IPost) {
   return (
-    <Card className='mx-auto w-full max-w-xl'>
+    <Card className='mx-auto w-full max-w-2xl'>
       {/* card header */}
       <CardHeader className='flex flex-row gap-4'>
         <Avatar>

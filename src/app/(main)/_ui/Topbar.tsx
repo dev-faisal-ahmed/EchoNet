@@ -8,12 +8,20 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 
-import { DropdownMenu } from '@/components/ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+} from '@/components/ui/dropdown-menu';
+
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { AlignJustifyIcon, LogOutIcon } from 'lucide-react';
 import { sidebarLinks } from '../_lib/sidebarLinks';
 import { Logo } from '@/components/shared/Logo';
-import { AlignJustifyIcon } from 'lucide-react';
-import { useGetUser } from '@/hooks';
+import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import { useGetUser } from '@/hooks';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -55,9 +63,29 @@ export function Topbar() {
       <Logo />
       <div className='ml-auto'>
         <DropdownMenu>
-          <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary text-2xl font-semibold'>
-            {user?.name?.[0]}
-          </div>
+          <DropdownMenuTrigger asChild>
+            <Avatar>
+              <AvatarFallback className='text-2xl font-semibold'>
+                {user?.name?.[0]}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            side='bottom'
+            align='end'
+            sideOffset={10}
+            className='p-4'
+          >
+            <h2 className='font-semibold'>{user?.name}</h2>
+            <p className='text-muted-foreground'>{user?.email}</p>
+            <Button
+              onClick={() => signOut()}
+              variant={'destructive'}
+              className='mt-4 w-full gap-1'
+            >
+              <LogOutIcon size={20} /> Logout
+            </Button>
+          </DropdownMenuContent>
         </DropdownMenu>
       </div>
     </nav>

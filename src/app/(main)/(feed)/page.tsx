@@ -1,10 +1,11 @@
 'use client';
 
+import { FeedLoader } from '@/components/shared/loader/FeedLoader';
 import { useQuery } from '@tanstack/react-query';
+import { PostCard } from './_ui/PostCard';
 import { AddPost } from './_ui/AddPost';
 import { getPosts } from '@/helpers';
 import { TAGS } from '@/data';
-import { PostCard } from './_ui/PostCard';
 
 export default function HomePage() {
   const { data: posts, isLoading } = useQuery({
@@ -12,7 +13,7 @@ export default function HomePage() {
     queryKey: [TAGS.POSTS],
   });
 
-  if (isLoading) return <div> Loading</div>;
+  if (isLoading) return <FeedLoader />;
 
   return (
     <main>

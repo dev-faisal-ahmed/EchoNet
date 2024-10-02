@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { sidebarLinks } from '../_lib/sidebarLinks';
-import { useGetUser } from '@/hooks';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/shared/Logo';
 import { usePathname } from 'next/navigation';
 import { LogOutIcon } from 'lucide-react';
 import { signOut } from 'next-auth/react';
+import { useGetUser } from '@/hooks';
 import { cn } from '@/lib/utils';
 
 interface IProps {
@@ -22,7 +23,7 @@ export function Sidebar({ className }: IProps) {
   return (
     <aside
       className={cn(
-        'grid h-screen w-full max-w-[240px] grid-rows-[auto_1fr_auto] bg-primary-foreground p-6',
+        'sticky top-0 grid h-screen w-full max-w-[240px] grid-rows-[auto_1fr_auto] bg-primary-foreground p-6',
         className,
       )}
     >
@@ -44,9 +45,11 @@ export function Sidebar({ className }: IProps) {
       </div>
       <div className='border-t pt-4'>
         <div className='flex gap-3'>
-          <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary text-2xl font-semibold'>
-            {user?.name?.[0]}
-          </div>
+          <Avatar>
+            <AvatarFallback className='text-2xl font-semibold'>
+              {user?.name?.[0]}
+            </AvatarFallback>
+          </Avatar>
           <div className='flex-1'>
             <h3 className='font-semibold'>{user?.name}</h3>
             <p className='mt-1 line-clamp-1 text-sm text-muted-foreground'>
