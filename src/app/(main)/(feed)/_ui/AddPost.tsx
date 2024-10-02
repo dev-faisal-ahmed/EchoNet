@@ -21,7 +21,7 @@ import { CustomSelect } from '@/components/shared/form/CustomSelect';
 import { ImageInput } from '@/components/shared/form/ImageInput';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { Card, CardContent } from '@/components/ui/card';
-import { useGetUser } from '@/hooks/useGetUser';
+import { useGetUser } from '@/hooks';
 import { useAddPost } from '../_lib/useAddPost';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';

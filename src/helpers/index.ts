@@ -3,3 +3,6 @@ export * from './axios-client/axiosInstance';
 export * from './catchAsync';
 export * from './axios-server';
 export * from './axios-client';
+
+// data fetching
+export * from './data-fetching/getPosts';

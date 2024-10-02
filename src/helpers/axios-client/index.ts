@@ -2,7 +2,7 @@ import { axiosInstance } from './axiosInstance';
 
 export const graphQlClient = async (
   query: string,
-  variables: Record<string, unknown>,
+  variables?: Record<string, unknown>,
 ) => {
   try {
     const response = await axiosInstance.post('', {

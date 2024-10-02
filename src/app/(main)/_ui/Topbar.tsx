@@ -12,7 +12,7 @@ import { DropdownMenu } from '@/components/ui/dropdown-menu';
 import { sidebarLinks } from '../_lib/sidebarLinks';
 import { Logo } from '@/components/shared/Logo';
 import { AlignJustifyIcon } from 'lucide-react';
-import { useGetUser } from '@/hooks/useGetUser';
+import { useGetUser } from '@/hooks';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';

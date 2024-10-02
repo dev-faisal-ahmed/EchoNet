@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { sidebarLinks } from '../_lib/sidebarLinks';
-import { useGetUser } from '@/hooks/useGetUser';
+import { useGetUser } from '@/hooks';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/shared/Logo';
 import { usePathname } from 'next/navigation';

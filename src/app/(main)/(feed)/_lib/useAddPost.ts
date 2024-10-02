@@ -7,6 +7,8 @@ import { ADD_POST } from '@/lib/queries';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { queryClient } from '@/providers/QueryClient';
+import { TAGS } from '@/data';
 
 const addPostFormSchema = z.object({
   body: z.string().optional(),
@@ -32,6 +34,11 @@ export const useAddPost = () => {
   const addPost = useMutation({
     mutationFn: async (payload: IAddPostPayload) => {
       return await graphQlClient(ADD_POST, { ...payload });
+    },
+
+    // invalidate query when new post is added
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [TAGS.POSTS] });
     },
   });
 

@@ -17,3 +17,19 @@ export const ADD_POST = `
     }
   }
 `;
+
+export const GET_POSTS = `
+  query GetPosts {
+    posts(order_by: {createdAt: desc}) {
+      body
+      createdAt
+      creatorEmail
+      imageUrl
+      postId
+      privacy
+      creator {
+        name
+      }
+    }
+  }
+`;
