@@ -80,5 +80,6 @@ export const useAddPost = () => {
       onImageRemove,
     },
     imageRef,
+    isPending: addPostMutation.isPending,
   };
 };

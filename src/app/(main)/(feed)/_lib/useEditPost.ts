@@ -81,5 +81,6 @@ export const useEditPost = (
     states: { isDialogOpen, setIsDialogOpen },
     handlers: { handleEditPost, onImageRemove },
     imageRef,
+    isPending: editPostMutation.isPending,
   };
 };

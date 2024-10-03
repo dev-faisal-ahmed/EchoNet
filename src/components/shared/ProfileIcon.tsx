@@ -1,20 +1,15 @@
-import { cn } from '@/lib/utils';
+import { Avatar, AvatarFallback } from '../ui/avatar';
 
 interface IProps {
   name: string;
-  size?: number;
-  className?: string;
 }
-export function ProfileIcon({ name, size = 40, className }: IProps) {
+
+export function ProfileIcon({ name }: IProps) {
   return (
-    <div
-      style={{ width: size, height: size }}
-      className={cn(
-        'flex items-center justify-center rounded-full bg-primary text-2xl font-semibold',
-        className,
-      )}
-    >
-      {name[0]}
-    </div>
+    <Avatar>
+      <AvatarFallback className='text-2xl font-semibold'>
+        {name[0]}
+      </AvatarFallback>
+    </Avatar>
   );
 }

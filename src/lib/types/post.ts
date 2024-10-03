@@ -1,4 +1,4 @@
-enum EPostPrivacy {
+export enum EPostPrivacy {
   PUBLIC = 'PUBLIC',
   ONLY_ME = 'ONLY_ME',
 }

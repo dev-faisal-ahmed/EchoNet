@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { sidebarLinks } from '../_lib/sidebarLinks';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/shared/Logo';
@@ -45,11 +45,7 @@ export function Sidebar({ className }: IProps) {
       </div>
       <div className='border-t pt-4'>
         <div className='flex gap-3'>
-          <Avatar>
-            <AvatarFallback className='text-2xl font-semibold'>
-              {user?.name?.[0]}
-            </AvatarFallback>
-          </Avatar>
+          <ProfileIcon name={user?.name as string} />
           <div className='flex-1'>
             <h3 className='font-semibold'>{user?.name}</h3>
             <p className='mt-1 line-clamp-1 text-sm text-muted-foreground'>

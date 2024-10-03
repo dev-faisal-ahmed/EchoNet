@@ -29,6 +29,7 @@ export function EditPost({
     imageRef,
     states: { isDialogOpen, setIsDialogOpen },
     handlers: { handleEditPost, onImageRemove },
+    isPending,
   } = useEditPost({ body, imageUrl, privacy, postId });
 
   return (
@@ -66,7 +67,9 @@ export function EditPost({
               defaultValue={imageUrl}
               onImageRemove={onImageRemove}
             />
-            <Button className='mt-6'>Post</Button>
+            <Button disabled={isPending} className='mt-6'>
+              {isPending ? 'Editing...' : 'Edit Post'}
+            </Button>
           </form>
         </Form>
       </DialogContent>

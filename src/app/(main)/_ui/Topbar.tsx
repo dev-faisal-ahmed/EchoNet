@@ -14,7 +14,7 @@ import {
   DropdownMenuContent,
 } from '@/components/ui/dropdown-menu';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { AlignJustifyIcon, LogOutIcon } from 'lucide-react';
 import { sidebarLinks } from '../_lib/sidebarLinks';
 import { Logo } from '@/components/shared/Logo';
@@ -64,11 +64,7 @@ export function Topbar() {
       <div className='ml-auto'>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Avatar>
-              <AvatarFallback className='text-2xl font-semibold'>
-                {user?.name?.[0]}
-              </AvatarFallback>
-            </Avatar>
+            <ProfileIcon name={user?.name as string} />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             side='bottom'

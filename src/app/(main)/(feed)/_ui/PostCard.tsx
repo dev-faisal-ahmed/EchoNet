@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { ProfileIcon } from '@/components/shared/ProfileIcon';
+import { GlobeIcon, ShieldCheckIcon } from 'lucide-react';
 import { getDateForPost } from '@/helpers/dateHelper';
-import { IPost } from '@/lib/types';
-import { GlobeIcon } from 'lucide-react';
-import Image from 'next/image';
+import { EPostPrivacy, IPost } from '@/lib/types';
+import { DeletePost } from './DeletePost';
 import { EditPost } from './EditPost';
 import { useGetUser } from '@/hooks';
-import { DeletePost } from './DeletePost';
+import Image from 'next/image';
 
 export function PostCard({
   postId,
@@ -22,15 +22,15 @@ export function PostCard({
     <Card className='mx-auto w-full max-w-2xl'>
       {/* card header */}
       <CardHeader className='flex flex-row gap-4'>
-        <Avatar>
-          <AvatarFallback className='text-2xl font-semibold'>
-            {creator.name[0]}
-          </AvatarFallback>
-        </Avatar>
+        <ProfileIcon name={creator.name} />
         <div>
           <CardTitle>{creator.name}</CardTitle>
           <p className='mt-2 flex items-center gap-1 text-sm text-muted-foreground'>
-            <GlobeIcon size={20} />
+            {privacy === EPostPrivacy.PUBLIC ? (
+              <GlobeIcon size={20} />
+            ) : (
+              <ShieldCheckIcon size={20} />
+            )}
             {getDateForPost(createdAt)}
           </p>
         </div>

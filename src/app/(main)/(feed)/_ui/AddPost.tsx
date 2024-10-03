@@ -33,6 +33,7 @@ export function AddPost() {
     imageRef,
     states: { isDialogOpen, setIsDialogOpen },
     handlers: { handleAddPost, onImageRemove },
+    isPending,
   } = useAddPost();
 
   return (
@@ -93,7 +94,9 @@ export function AddPost() {
               placeholder="Tell us what's going on"
             />
             <ImageInput ref={imageRef} onImageRemove={onImageRemove} />
-            <Button className='mt-6'>Post</Button>
+            <Button disabled={isPending} className='mt-6'>
+              {isPending ? 'Posting...' : 'Post'}
+            </Button>
           </form>
         </Form>
       </DialogContent>
