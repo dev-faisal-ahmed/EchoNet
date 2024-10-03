@@ -35,7 +35,7 @@ export function EditPost({ body, imageUrl, privacy }: Partial<IPost>) {
       </DialogTrigger>
       <DialogContent className='max-w-lg'>
         <DialogHeader>
-          <DialogTitle className='mb-1'>Add Post</DialogTitle>
+          <DialogTitle className='mb-1'>Edit Post</DialogTitle>
           <DialogDescription>
             Tell us what&apos;s on your mind
           </DialogDescription>

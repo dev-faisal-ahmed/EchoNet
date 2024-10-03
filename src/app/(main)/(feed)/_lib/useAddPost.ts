@@ -1,23 +1,18 @@
 import { uploadImage } from '@/helpers/server-actions/uploadImage';
-import { catchAsync, graphQlClient } from '@/helpers';
+import { queryClient } from '@/providers/QueryClient';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { addPost, catchAsync } from '@/helpers';
 import { useForm } from 'react-hook-form';
-import { ADD_POST } from '@/lib/queries';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
-import { z } from 'zod';
-import { queryClient } from '@/providers/QueryClient';
 import { TAGS } from '@/data';
+import { z } from 'zod';
 
 const addPostFormSchema = z.object({
   body: z.string().optional(),
-  privacy: z.string().min(1, { message: 'Please select privacy' }),
+  privacy: z.string(),
 });
-
-interface IAddPostPayload extends z.infer<typeof addPostFormSchema> {
-  imageUrl: string;
-}
 
 export const useAddPost = () => {
   const form = useForm<z.infer<typeof addPostFormSchema>>({
@@ -31,11 +26,8 @@ export const useAddPost = () => {
   // states
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const addPost = useMutation({
-    mutationFn: async (payload: IAddPostPayload) => {
-      return await graphQlClient(ADD_POST, { ...payload });
-    },
-
+  const addPostMutation = useMutation({
+    mutationFn: addPost,
     // invalidate query when new post is added
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [TAGS.POSTS] });
@@ -64,14 +56,15 @@ export const useAddPost = () => {
           imageUrl = await uploadImage(imageBBFormData);
         }
 
-        const response = await addPost.mutateAsync({
-          ...formData,
-          imageUrl,
+        const response = await addPostMutation.mutateAsync({
+          body: formData.body || '',
+          imageUrl: imageUrl || '',
+          privacy: formData.privacy,
         });
 
         // checking if post id is found if not then throwing an error
-        if (!response?.data?.insert_posts_one?.postId)
-          throw new Error('Post is not created');
+        console.log(response);
+        if (!response?.postId) throw new Error('Post is not created');
 
         toast.success('Post created successfully', { id });
         // resetting the form

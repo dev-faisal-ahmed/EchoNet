@@ -33,3 +33,23 @@ export const GET_POSTS = `
     }
   }
 `;
+
+export const EDIT_POST = `
+  mutation EditPost (
+    $postId: uuid! 
+    $body: String!
+    $imageUrl: String!
+    $privacy: POST_PRIVACY_enum!
+  ) {
+    update_posts_by_pk(
+      pk_columns: {postId: $postId}
+      _set: {
+        body: $body
+        imageUrl: $imageUrl
+        privacy: $privacy
+      }
+    ) {
+      postId
+    }
+  }
+`;
