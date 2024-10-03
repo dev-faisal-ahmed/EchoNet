@@ -28,10 +28,7 @@ export const useAddPost = () => {
 
   const addPostMutation = useMutation({
     mutationFn: addPost,
-    // invalidate query when new post is added
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [TAGS.POSTS] });
-    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [TAGS.POSTS] }),
   });
 
   const imageRef = useRef<HTMLInputElement>(null);

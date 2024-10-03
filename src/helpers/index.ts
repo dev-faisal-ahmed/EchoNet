@@ -7,3 +7,4 @@ export * from './axios-client';
 // data fetching
 export * from './data-fetching/getPosts';
 export * from './data-fetching/addPost';
+export * from './data-fetching/editPost';

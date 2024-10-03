@@ -18,27 +18,30 @@ import { SquarePenIcon } from 'lucide-react';
 import { Form } from '@/components/ui/form';
 import { IPost } from '@/lib/types';
 
-export function EditPost({ body, imageUrl, privacy }: Partial<IPost>) {
+export function EditPost({
+  postId,
+  body,
+  imageUrl,
+  privacy,
+}: Pick<IPost, 'postId' | 'body' | 'imageUrl' | 'privacy'>) {
   const {
     form,
     imageRef,
     states: { isDialogOpen, setIsDialogOpen },
     handlers: { handleEditPost, onImageRemove },
-  } = useEditPost({ body, imageUrl, privacy });
+  } = useEditPost({ body, imageUrl, privacy, postId });
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <span>
+        <span className='cursor-pointer'>
           <SquarePenIcon size={20} />
         </span>
       </DialogTrigger>
       <DialogContent className='max-w-lg'>
         <DialogHeader>
           <DialogTitle className='mb-1'>Edit Post</DialogTitle>
-          <DialogDescription>
-            Tell us what&apos;s on your mind
-          </DialogDescription>
+          <DialogDescription>Edit your post</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>

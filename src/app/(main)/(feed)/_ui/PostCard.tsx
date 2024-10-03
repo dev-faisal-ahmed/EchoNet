@@ -8,6 +8,7 @@ import { EditPost } from './EditPost';
 import { useGetUser } from '@/hooks';
 
 export function PostCard({
+  postId,
   creator,
   createdAt,
   body,
@@ -34,7 +35,12 @@ export function PostCard({
         </div>
         {email === creatorEmail && (
           <div className='ml-auto'>
-            <EditPost body={body} imageUrl={imageUrl} privacy={privacy} />
+            <EditPost
+              postId={postId}
+              body={body}
+              imageUrl={imageUrl}
+              privacy={privacy}
+            />
           </div>
         )}
       </CardHeader>
