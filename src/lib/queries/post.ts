@@ -20,7 +20,7 @@ export const ADD_POST = `
 
 export const GET_POSTS = `
   query GetPosts {
-    posts(order_by: {createdAt: desc}) {
+    posts(where: {isDeleted: {_eq: false}}, order_by: {createdAt: desc}) {
       body
       createdAt
       creatorEmail
@@ -48,6 +48,17 @@ export const EDIT_POST = `
         imageUrl: $imageUrl
         privacy: $privacy
       }
+    ) {
+      postId
+    }
+  }
+`;
+
+export const DELETE_POST = `
+  mutation DeletePost($postId: uuid!) {
+    update_posts_by_pk(
+      pk_columns: { postId: $postId }
+      _set: { isDeleted: true }
     ) {
       postId
     }

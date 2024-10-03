@@ -6,6 +6,7 @@ import { GlobeIcon } from 'lucide-react';
 import Image from 'next/image';
 import { EditPost } from './EditPost';
 import { useGetUser } from '@/hooks';
+import { DeletePost } from './DeletePost';
 
 export function PostCard({
   postId,
@@ -34,13 +35,14 @@ export function PostCard({
           </p>
         </div>
         {email === creatorEmail && (
-          <div className='ml-auto'>
+          <div className='ml-auto flex items-center gap-3'>
             <EditPost
               postId={postId}
               body={body}
               imageUrl={imageUrl}
               privacy={privacy}
             />
+            <DeletePost postId={postId} />
           </div>
         )}
       </CardHeader>
