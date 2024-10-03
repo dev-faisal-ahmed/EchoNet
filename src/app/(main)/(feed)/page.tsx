@@ -1,6 +1,6 @@
 'use client';
 
-import { FeedLoader } from '@/components/shared/loader/FeedLoader';
+import { FeedLoader } from '@/components/shared/loader';
 import { useQuery } from '@tanstack/react-query';
 import { PostCard } from './_ui/PostCard';
 import { AddPost } from './_ui/AddPost';

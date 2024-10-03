@@ -1,4 +1,4 @@
-import { graphQlClient } from '../axios-client';
+import { graphQlClient } from '../../axios-client';
 import { DELETE_POST } from '@/lib/queries';
 
 export const deletePost = async (postId: string) => {

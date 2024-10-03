@@ -1,4 +1,4 @@
-import { graphQlClient } from '../axios-client';
+import { graphQlClient } from '../../axios-client';
 import { ADD_POST } from '@/lib/queries';
 
 interface IAddPostPayload {
