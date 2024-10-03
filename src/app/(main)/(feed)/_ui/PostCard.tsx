@@ -4,8 +4,18 @@ import { getDateForPost } from '@/helpers/dateHelper';
 import { IPost } from '@/lib/types';
 import { GlobeIcon } from 'lucide-react';
 import Image from 'next/image';
+import { EditPost } from './EditPost';
+import { useGetUser } from '@/hooks';
 
-export function PostCard({ creator, createdAt, body, imageUrl }: IPost) {
+export function PostCard({
+  creator,
+  createdAt,
+  body,
+  imageUrl,
+  creatorEmail,
+  privacy,
+}: IPost) {
+  const { email } = useGetUser()!;
   return (
     <Card className='mx-auto w-full max-w-2xl'>
       {/* card header */}
@@ -22,6 +32,11 @@ export function PostCard({ creator, createdAt, body, imageUrl }: IPost) {
             {getDateForPost(createdAt)}
           </p>
         </div>
+        {email === creatorEmail && (
+          <div className='ml-auto'>
+            <EditPost body={body} imageUrl={imageUrl} privacy={privacy} />
+          </div>
+        )}
       </CardHeader>
       {/* card description */}
       <CardContent>
