@@ -20,7 +20,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 
   return (
     <main className='flex gap-6'>
-      <Sidebar className='hidden md:grid' />
+      <Sidebar className='hidden lg:grid' />
       <main className='w-full px-6 py-6'>
         <Topbar />
         {children}

@@ -51,3 +51,14 @@ export const GET_FRIENDSHIP = `
     }
   }
 `;
+
+export const GET_SENT_REQUEST = `
+  query GetSentRequest($email: String!) {
+    friends(where: {senderEmail: {_eq: $email}}) {
+      receiver {
+        name
+        email
+      }
+    }
+  }
+`;

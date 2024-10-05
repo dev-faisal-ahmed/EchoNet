@@ -20,9 +20,9 @@ export function SuggestedFriendCard({ email, name }: IFriend) {
     <Card>
       <CardHeader className='flex-row gap-4'>
         <ProfileIcon name={name} />
-        <div>
+        <div className='pr-2'>
           <CardTitle>{name}</CardTitle>
-          <CardDescription className='mt-2'>{email}</CardDescription>
+          <CardDescription className='mt-2 truncate'>{email}</CardDescription>
         </div>
       </CardHeader>
       <CardContent>

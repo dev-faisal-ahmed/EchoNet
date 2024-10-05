@@ -3,9 +3,9 @@
 import { getSuggestedFriend } from '@/helpers/data-fetching';
 import { SuggestedFriendCard } from './SuggestedFriendCard';
 import { useQuery } from '@tanstack/react-query';
+import { FriendLoader } from '../FriendLoader';
 import { useGetUser } from '@/hooks';
 import { TAGS } from '@/data';
-import { FriendLoader } from '../FriendLoader';
 
 export function SuggestedFriends() {
   const user = useGetUser();
@@ -19,7 +19,7 @@ export function SuggestedFriends() {
   return (
     <section>
       <h3 className='font-semibold'>Suggested Friends.</h3>
-      <div className='mt-4 grid grid-cols-4 gap-6'>
+      <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
         {suggestedFriends?.map(({ email, name }) => (
           <SuggestedFriendCard key={email} email={email} name={name} />
         ))}

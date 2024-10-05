@@ -30,7 +30,7 @@ export function Topbar() {
   const user = useGetUser();
 
   return (
-    <nav className='mb-6 flex w-full items-center gap-4 md:hidden'>
+    <nav className='mb-6 flex w-full items-center gap-4 lg:hidden'>
       <Sheet>
         <SheetTrigger>
           <span className='block rounded-full bg-white p-2 text-primary'>
