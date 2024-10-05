@@ -17,7 +17,7 @@ const font = Poppins({ subsets: ['latin'], weight: ['400', '600'] });
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='en' className='dark'>
-      <body className={`${font.className} antialiased`}>
+      <body className={`${font.className} bg-dark-background antialiased`}>
         <NextAuthProviders>
           <TanStackQueryClientProvider>
             {children}

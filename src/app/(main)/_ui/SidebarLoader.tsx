@@ -1,5 +1,4 @@
 import { Skeleton } from '@/components/ui/skeleton';
-import { FeedLoader } from './FeedLoader';
 
 export function SidebarLoader() {
   return (
@@ -12,7 +11,6 @@ export function SidebarLoader() {
           ))}
         </div>
       </Skeleton>
-      <FeedLoader />
     </div>
   );
 }

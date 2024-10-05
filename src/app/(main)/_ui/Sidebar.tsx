@@ -23,7 +23,7 @@ export function Sidebar({ className }: IProps) {
   return (
     <aside
       className={cn(
-        'sticky top-0 grid h-screen w-full max-w-[240px] grid-rows-[auto_1fr_auto] bg-primary-foreground p-6',
+        'sticky top-0 grid h-screen w-full max-w-[240px] grid-rows-[auto_1fr_auto] border-r bg-background p-6',
         className,
       )}
     >

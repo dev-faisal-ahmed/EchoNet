@@ -1,10 +1,10 @@
 'use client';
 
-import { FeedLoader } from '@/components/shared/loader';
+import { getPosts } from '@/helpers/data-fetching';
 import { useQuery } from '@tanstack/react-query';
+import { FeedLoader } from './_ui/FeedLoader';
 import { PostCard } from './_ui/PostCard';
 import { AddPost } from './_ui/AddPost';
-import { getPosts } from '@/helpers';
 import { TAGS } from '@/data';
 
 export default function HomePage() {

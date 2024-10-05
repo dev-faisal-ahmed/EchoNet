@@ -1,3 +1,9 @@
+import { SuggestedFriends } from './_ui/suggested-friends';
+
 export default function FriendsPage() {
-  return <div>FriendsPage</div>;
+  return (
+    <main>
+      <SuggestedFriends />
+    </main>
+  );
 }

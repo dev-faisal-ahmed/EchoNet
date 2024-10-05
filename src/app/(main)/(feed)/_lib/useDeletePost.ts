@@ -1,6 +1,7 @@
 import { queryClient } from '@/providers/QueryClient';
+import { deletePost } from '@/helpers/data-fetching';
 import { useMutation } from '@tanstack/react-query';
-import { catchAsync, deletePost } from '@/helpers';
+import { catchAsync } from '@/helpers';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { TAGS } from '@/data';

@@ -1,7 +1,7 @@
 'use client';
 
-import { SidebarLoader } from '@/components/shared/loader';
 import { PropsWithChildren, useEffect } from 'react';
+import { SidebarLoader } from './_ui/SidebarLoader';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Sidebar } from './_ui/Sidebar';

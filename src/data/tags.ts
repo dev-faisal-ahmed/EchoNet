@@ -1,3 +1,4 @@
 export enum TAGS {
   POSTS = 'POSTS',
+  SUGGESTED_FRIENDS = 'SUGGESTED_FRIENDS',
 }
