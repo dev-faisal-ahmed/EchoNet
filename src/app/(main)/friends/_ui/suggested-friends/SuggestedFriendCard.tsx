@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardHeader,
@@ -7,10 +9,13 @@ import {
 } from '@/components/ui/card';
 
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
+import { useAddFriend } from '../../_lib/useAddFriend';
 import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
 
 export function SuggestedFriendCard({ email, name }: IFriend) {
+  const { handleAddFriend, isPending } = useAddFriend();
+
   return (
     <Card>
       <CardHeader className='flex-row gap-4'>
@@ -21,7 +26,13 @@ export function SuggestedFriendCard({ email, name }: IFriend) {
         </div>
       </CardHeader>
       <CardContent>
-        <Button className='w-full'>Add Friend</Button>
+        <Button
+          onClick={() => handleAddFriend(email)}
+          disabled={isPending}
+          className='w-full'
+        >
+          {isPending ? 'Adding Friend...' : 'Add Friend'}
+        </Button>
       </CardContent>
     </Card>
   );

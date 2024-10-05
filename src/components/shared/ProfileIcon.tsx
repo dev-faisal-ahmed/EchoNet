@@ -7,8 +7,8 @@ interface IProps {
 export function ProfileIcon({ name }: IProps) {
   return (
     <Avatar>
-      <AvatarFallback className='text-2xl font-semibold'>
-        {name[0]}
+      <AvatarFallback>
+        <span className='text-2xl font-semibold'>{name[0]}</span>
       </AvatarFallback>
     </Avatar>
   );

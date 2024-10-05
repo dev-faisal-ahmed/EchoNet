@@ -31,8 +31,8 @@ export const GET_SUGGESTED_FRIENDS = `
 `;
 
 export const ADD_FRIEND = `
-  mutation AddFriend($friendEmail: String!) {
-    insert_friends_one(object: {receiverEmail: $friendEmail}) {
+  mutation AddFriend($receiverEmail: String!) {
+    insert_friends_one(object: {receiverEmail: $receiverEmail}) {
       receiverEmail
     }
   }
