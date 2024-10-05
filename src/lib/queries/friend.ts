@@ -29,3 +29,25 @@ export const GET_SUGGESTED_FRIENDS = `
     }
   }
 `;
+
+export const ADD_FRIEND = `
+  mutation AddFriend($friendEmail: String!) {
+    insert_friends_one(object: {receiverEmail: $friendEmail}) {
+      receiverEmail
+    }
+  }
+`;
+
+export const GET_FRIENDSHIP = `
+  query GetFriendShip (
+  $receiverEmail:String!, 
+  $senderEmail:String!
+  ){
+    friends_by_pk(
+    receiverEmail: $receiverEmail, 
+    senderEmail: $senderEmail
+    ) {
+      senderEmail
+    }
+  }
+`;
