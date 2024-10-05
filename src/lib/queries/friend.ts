@@ -62,3 +62,17 @@ export const GET_SENT_REQUEST = `
     }
   }
 `;
+
+export const CANCEL_FRIEND_REQUEST = `
+  mutation CancelFriendRequest (
+    $senderEmail: String!
+    $receiverEmail: String!
+  ) {
+    delete_friends_by_pk(
+      senderEmail: $senderEmail
+      receiverEmail: $receiverEmail
+    ) {
+      receiverEmail
+    }
+  }
+`;

@@ -9,9 +9,8 @@ export const useAddFriend = () => {
   const addFriendMutation = useMutation({
     mutationFn: addFriend,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [TAGS.SUGGESTED_FRIENDS, TAGS.SENT_REQUESTS],
-      });
+      queryClient.invalidateQueries({ queryKey: [TAGS.SUGGESTED_FRIENDS] });
+      queryClient.invalidateQueries({ queryKey: [TAGS.SENT_REQUESTS] });
     },
   });
 
