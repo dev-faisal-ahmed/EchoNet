@@ -8,4 +8,5 @@ export * from './post/addPost';
 export * from './friend/cancelFriendRequest';
 export * from './friend/getSuggestedFriend';
 export * from './friend/getSentRequests';
+export * from './friend/getFriendRequests';
 export * from './friend/addFriend';

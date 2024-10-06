@@ -36,7 +36,7 @@ export function SentRequestCard({ name, email }: IFriend) {
             }
             disabled={isPending}
             className='w-full'
-            variant='destructive'
+            variant='outline'
           >
             {isPending ? 'Canceling Request...' : 'Cancel Request'}
           </Button>

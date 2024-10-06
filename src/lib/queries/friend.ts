@@ -54,13 +54,19 @@ export const GET_FRIENDSHIP = `
 
 export const GET_SENT_REQUEST = `
   query GetSentRequest($email: String!) {
-    friends(where: {senderEmail: {_eq: $email}}) {
-      receiver {
-        name
-        email
-      }
+  friends(
+    where: {
+      senderEmail: {_eq: $email}, 
+      status: {_eq: REQUESTED}
+    }
+  ) {
+    receiver {
+      name
+      email
     }
   }
+}
+
 `;
 
 export const CANCEL_FRIEND_REQUEST = `
@@ -73,6 +79,22 @@ export const CANCEL_FRIEND_REQUEST = `
       receiverEmail: $receiverEmail
     ) {
       receiverEmail
+    }
+  }
+`;
+
+export const GET_FRIEND_REQUESTS = `
+  query GetFriendRequests ($email: String!) {
+    friends(
+      where: {
+        receiverEmail : {_eq: $email}
+        status: {_eq: REQUESTED}
+      }
+    ) {
+      sender {
+        name
+        email
+      }
     }
   }
 `;
