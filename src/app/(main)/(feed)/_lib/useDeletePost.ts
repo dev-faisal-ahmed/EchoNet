@@ -19,7 +19,7 @@ export const useDeletePost = () => {
       id,
       tryFn: async () => {
         const response = await deletePostMutation.mutateAsync(postId);
-        if (!response?.postId) throw new Error('Failed to delete the post');
+        if (!response?.id) throw new Error('Failed to delete the post');
         toast.success('Post deleted successfully', { id });
         setIsDialogOpen(false);
       },

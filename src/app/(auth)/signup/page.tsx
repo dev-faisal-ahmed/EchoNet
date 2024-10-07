@@ -57,7 +57,7 @@ export default function SignUpPage() {
                   className='mx-auto mt-2 w-2/3'
                   type='submit'
                 >
-                  SignUp
+                  {isLoading ? 'Signing up...' : 'SignUp'}
                 </Button>
                 <p className='text-center text-sm text-muted-foreground'>
                   Already have an account?{' '}

@@ -53,12 +53,12 @@ export const EDIT_POST = `
 `;
 
 export const DELETE_POST = `
-  mutation DeletePost($postId: uuid!) {
+  mutation DeletePost($id: uuid!) {
     update_posts_by_pk(
-      pk_columns: { postId: $postId }
+      pk_columns: { id: $id }
       _set: { isDeleted: true }
     ) {
-      postId
+      id
     }
   }
 `;

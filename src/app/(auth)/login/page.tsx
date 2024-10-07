@@ -47,7 +47,7 @@ export default function LoginPage() {
                   className='mx-auto mt-2 w-2/3'
                   type='submit'
                 >
-                  Login
+                  {isLoading ? 'Logging in...' : 'Login'}
                 </Button>
                 <p className='text-center text-sm text-muted-foreground'>
                   New Here?{' '}
