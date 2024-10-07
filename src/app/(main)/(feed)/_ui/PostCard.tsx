@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { GlobeIcon, ShieldCheckIcon } from 'lucide-react';
@@ -6,15 +8,13 @@ import { EPostPrivacy, IPost } from '@/lib/types';
 import { DeletePost } from './DeletePost';
 import { EditPost } from './EditPost';
 import { useGetUser } from '@/hooks';
-import Image from 'next/image';
 
 export function PostCard({
-  postId,
+  id,
   creator,
   createdAt,
   body,
   imageUrl,
-  creatorEmail,
   privacy,
 }: IPost) {
   const { email } = useGetUser()!;
@@ -34,15 +34,15 @@ export function PostCard({
             {getDateForPost(createdAt)}
           </p>
         </div>
-        {email === creatorEmail && (
+        {email === creator.email && (
           <div className='ml-auto flex items-center gap-3'>
             <EditPost
-              postId={postId}
+              postId={id}
               body={body}
               imageUrl={imageUrl}
               privacy={privacy}
             />
-            <DeletePost postId={postId} />
+            <DeletePost postId={id} />
           </div>
         )}
       </CardHeader>

@@ -4,11 +4,10 @@ export enum EPostPrivacy {
 }
 
 export interface IPost {
-  postId: string;
-  creatorEmail: string;
+  id: string;
   body: string;
   imageUrl: string;
   privacy: EPostPrivacy;
   createdAt: string;
-  creator: { name: string };
+  creator: { name: string; email: string };
 }

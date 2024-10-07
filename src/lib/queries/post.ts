@@ -11,9 +11,7 @@ export const ADD_POST = `
         privacy: $privacy
       }
     ) {
-      postId
-      createdAt
-      creatorEmail
+      id
     }
   }
 `;
@@ -21,14 +19,14 @@ export const ADD_POST = `
 export const GET_POSTS = `
   query GetPosts {
     posts(where: {isDeleted: {_eq: false}}, order_by: {createdAt: desc}) {
+      id
       body
       createdAt
-      creatorEmail
       imageUrl
-      postId
       privacy
       creator {
         name
+        email
       }
     }
   }

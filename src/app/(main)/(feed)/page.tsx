@@ -19,7 +19,7 @@ export default function HomePage() {
     <main>
       <AddPost />
       <section className='mt-8 flex flex-col gap-6'>
-        {posts?.map((post) => <PostCard key={post.postId} {...post} />)}
+        {posts?.map((post) => <PostCard key={post.id} {...post} />)}
       </section>
     </main>
   );
