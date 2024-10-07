@@ -104,3 +104,21 @@ export const DELETE_FRIEND_REQUEST = `
     }
   }
 `;
+
+export const GET_MY_FRIENDS = `
+  query GetMyFriends {
+    friends(where: {status: {_eq: ACCEPTED}}) {
+      id
+      sender {
+        id
+        name
+        email
+      }
+      receiver {
+        id
+        name
+        email
+      }
+    }
+  }
+`;

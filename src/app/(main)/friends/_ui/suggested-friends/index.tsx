@@ -16,7 +16,7 @@ export function SuggestedFriends() {
 
   if (isPending) return <FriendLoader />;
 
-  return (
+  return suggestedFriends?.length ? (
     <section>
       <h3 className='mt-6 font-semibold'>Suggested Friends.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
@@ -25,5 +25,5 @@ export function SuggestedFriends() {
         ))}
       </div>
     </section>
-  );
+  ) : null;
 }

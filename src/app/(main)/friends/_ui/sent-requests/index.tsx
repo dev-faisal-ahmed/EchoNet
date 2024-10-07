@@ -16,7 +16,7 @@ export function SentRequests() {
 
   if (isPending) return <FriendLoader className='mt-6' />;
 
-  return (
+  return sentRequests?.length ? (
     <section className='mt-6'>
       <h3 className='font-semibold'>Sent Requests.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
@@ -25,5 +25,5 @@ export function SentRequests() {
         ))}
       </div>
     </section>
-  );
+  ) : null;
 }
