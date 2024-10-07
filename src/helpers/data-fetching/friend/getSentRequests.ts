@@ -6,9 +6,7 @@ interface ISentRequest {
   receiver: { name: string; email: string };
 }
 
-export const getSentRequests = async (
-  email: string,
-): Promise<ISentRequest[]> => {
-  const response = await graphQlClient(GET_SENT_REQUEST, { email });
+export const getSentRequests = async (id: string): Promise<ISentRequest[]> => {
+  const response = await graphQlClient(GET_SENT_REQUEST, { id });
   return response?.data?.friends;
 };

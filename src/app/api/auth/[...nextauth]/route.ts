@@ -13,6 +13,12 @@ import { JWT } from 'next-auth/jwt';
 declare module 'next-auth' {
   interface Session {
     accessToken?: string;
+    user: {
+      id?: string | null;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
   }
 }
 
@@ -86,6 +92,7 @@ const authOption: NextAuthOptions = {
       if (session.user) {
         session.user.email = token.email;
         session.user.name = token.name;
+        session.user.id = token.id as string;
       }
 
       session.accessToken = jwt.sign(token, NEXTAUTH_SECRET!, {

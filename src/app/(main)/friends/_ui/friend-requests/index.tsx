@@ -11,7 +11,7 @@ export function FriendRequests() {
   const user = useGetUser();
 
   const { data: friendRequests, isPending } = useQuery({
-    queryFn: () => getFriendRequests(user?.email as string),
+    queryFn: () => getFriendRequests(user?.id as string),
     queryKey: [TAGS.FRIEND_REQUESTS],
   });
 

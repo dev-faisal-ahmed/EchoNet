@@ -42,13 +42,8 @@ export const ADD_FRIEND = `
 `;
 
 export const GET_FRIEND_REQUESTS = `
-  query GetFriendRequests($email: String!) {
-    friends(
-      where: {
-        receiver: {email: {_eq: $email}}, 
-        status: {_eq: REQUESTED}
-      }
-    ) {
+  query GetFriendRequests($id: uuid!) {
+    friends(where: {receiverId: {_eq: $id}, status: {_eq: REQUESTED}}) {
       id
       sender {
         name
@@ -59,13 +54,8 @@ export const GET_FRIEND_REQUESTS = `
 `;
 
 export const GET_SENT_REQUEST = `
-  query GetSentRequest($email: String!) {
-    friends(
-      where: {
-        sender: {email: {_eq: $email}}, 
-        status: {_eq: REQUESTED}
-      }
-    ) {
+  query GetSentRequest($id: uuid!) {
+    friends(where: {senderId: {_eq: $id}, status: {_eq: REQUESTED}}) {
       id
       receiver {
         name

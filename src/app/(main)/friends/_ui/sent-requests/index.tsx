@@ -10,7 +10,7 @@ import { TAGS } from '@/data';
 export function SentRequests() {
   const user = useGetUser();
   const { data: sentRequests, isPending } = useQuery({
-    queryFn: () => getSentRequests(user?.email as string),
+    queryFn: () => getSentRequests(user?.id as string),
     queryKey: [TAGS.SENT_REQUESTS],
   });
 

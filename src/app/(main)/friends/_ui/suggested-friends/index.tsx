@@ -18,7 +18,7 @@ export function SuggestedFriends() {
 
   return suggestedFriends?.length ? (
     <section>
-      <h3 className='mt-6 font-semibold'>Suggested Friends.</h3>
+      <h3 className='font-semibold'>Suggested Friends.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
         {suggestedFriends?.map(({ id, email, name }) => (
           <SuggestedFriendCard key={id} id={id} email={email} name={name} />

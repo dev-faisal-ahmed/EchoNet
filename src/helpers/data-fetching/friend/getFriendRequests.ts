@@ -7,8 +7,8 @@ interface IFriendRequest {
 }
 
 export const getFriendRequests = async (
-  email: string,
+  id: string,
 ): Promise<IFriendRequest[]> => {
-  const response = await graphQlClient(GET_FRIEND_REQUESTS, { email });
+  const response = await graphQlClient(GET_FRIEND_REQUESTS, { id });
   return response?.data?.friends;
 };
