@@ -98,3 +98,19 @@ export const GET_FRIEND_REQUESTS = `
     }
   }
 `;
+
+export const ACCEPT_FRIEND_REQUEST = `
+  mutation AcceptFriendRequest(
+    $senderEmail: String!, 
+    $userEmail: String!
+  ) {
+    update_friends_by_pk(
+      pk_columns: {
+        senderEmail: $senderEmail, 
+        receiverEmail: $userEmail
+      }
+    ) {
+      senderEmail
+    }
+  }
+`;

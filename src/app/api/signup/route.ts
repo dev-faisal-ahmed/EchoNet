@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { catchAsync } from '@/helpers/catchAsync';
-import { API_SECRET, SALT } from '@/config';
 import { graphQlServerConnector } from '@/helpers';
+import { catchAsync } from '@/helpers/catchAsync';
 import { SING_UP_MUTATION } from '@/lib/queries';
+import { API_SECRET, SALT } from '@/config';
 
 export async function POST(req: NextRequest) {
   return catchAsync({

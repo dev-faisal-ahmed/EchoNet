@@ -20,7 +20,6 @@ export const useAddFriend = () => {
       id,
       tryFn: async () => {
         const response = await addFriendMutation.mutateAsync(receiverEmail);
-        console.log(response);
         if (response.error) throw Error(response.error);
         toast.success(response.success, { id });
       },

@@ -61,7 +61,7 @@ export const useAddPost = () => {
         });
 
         // checking if post id is found if not then throwing an error
-        console.log(response);
+
         if (!response?.postId) throw new Error('Post is not created');
 
         toast.success('Post created successfully', { id });

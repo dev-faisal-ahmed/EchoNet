@@ -38,7 +38,7 @@ const authOption: NextAuthOptions = {
             email,
           });
 
-          const userInfo = response?.data?.users_by_pk;
+          const [userInfo] = response?.data?.users;
           if (!userInfo) throw new Error('User not found!');
 
           const isPasswordMatch = await bcrypt.compare(
@@ -48,7 +48,7 @@ const authOption: NextAuthOptions = {
 
           if (!isPasswordMatch) throw new Error('Password does not match!');
 
-          return { id: email, email, name: userInfo.name };
+          return { id: userInfo.id, email, name: userInfo.name };
         } catch (error) {
           let message = 'Something went wrong';
           if (error instanceof Error) message = error.message;
@@ -68,14 +68,16 @@ const authOption: NextAuthOptions = {
     },
   },
   callbacks: {
-    async jwt({ token }) {
+    async jwt({ token, user }) {
+      if (user) token.id = user.id;
+
       return {
         ...token,
         ['https://hasura.io/jwt/claims']: {
           ['x-hasura-allowed-roles']: ['user'],
           ['x-hasura-default-role']: 'user',
           ['x-hasura-role']: 'user',
-          ['x-hasura-user-email']: token.email,
+          ['x-hasura-user-id']: token.id,
         },
       };
     },
