@@ -37,7 +37,7 @@ export function PostCard({
         {email === creator.email && (
           <div className='ml-auto flex items-center gap-3'>
             <EditPost
-              postId={id}
+              id={id}
               body={body}
               imageUrl={imageUrl}
               privacy={privacy}

@@ -1,11 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { uploadImage } from '@/helpers/server-actions';
 import { queryClient } from '@/providers/QueryClient';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef, useState } from 'react';
 import { editPost } from '@/helpers/data-fetching';
 import { catchAsync } from '@/helpers';
 import { useForm } from 'react-hook-form';
-import { useRef, useState } from 'react';
 import { IPost } from '@/lib/types';
 import { toast } from 'sonner';
 import { TAGS } from '@/data';
@@ -17,7 +19,7 @@ const editPostFormSchema = z.object({
 });
 
 export const useEditPost = (
-  payload: Pick<IPost, 'postId' | 'body' | 'privacy' | 'imageUrl'>,
+  payload: Pick<IPost, 'id' | 'body' | 'privacy' | 'imageUrl'>,
 ) => {
   const form = useForm<z.infer<typeof editPostFormSchema>>({
     resolver: zodResolver(editPostFormSchema),
@@ -63,11 +65,11 @@ export const useEditPost = (
         const response = await editPostMutation.mutateAsync({
           body: body || '',
           privacy,
-          postId: payload.postId,
+          id: payload.id,
           imageUrl: !doesUserWantToRemoveImage.current ? imageUrl : '',
         });
 
-        if (!response?.postId) throw new Error('Could not update the post');
+        if (!response?.id) throw new Error('Could not update the post');
         toast.success('Post updated successfully!', { id });
         setIsDialogOpen(false);
         form.reset();
@@ -76,6 +78,11 @@ export const useEditPost = (
       },
     });
   });
+
+  // using this to sync the form data with the updated data, after one successful update
+  useEffect(() => {
+    form.reset({ body: payload.body, privacy: payload.privacy });
+  }, [payload.body, payload.privacy]);
 
   return {
     form,

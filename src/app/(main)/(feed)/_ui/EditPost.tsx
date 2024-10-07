@@ -19,18 +19,18 @@ import { Form } from '@/components/ui/form';
 import { IPost } from '@/lib/types';
 
 export function EditPost({
-  postId,
+  id,
   body,
   imageUrl,
   privacy,
-}: Pick<IPost, 'postId' | 'body' | 'imageUrl' | 'privacy'>) {
+}: Pick<IPost, 'id' | 'body' | 'imageUrl' | 'privacy'>) {
   const {
     form,
     imageRef,
     states: { isDialogOpen, setIsDialogOpen },
     handlers: { handleEditPost, onImageRemove },
     isPending,
-  } = useEditPost({ body, imageUrl, privacy, postId });
+  } = useEditPost({ body, imageUrl, privacy, id });
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

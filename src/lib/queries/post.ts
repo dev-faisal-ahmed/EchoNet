@@ -34,20 +34,20 @@ export const GET_POSTS = `
 
 export const EDIT_POST = `
   mutation EditPost (
-    $postId: uuid! 
+    $id: uuid! 
     $body: String!
     $imageUrl: String!
     $privacy: POST_PRIVACY_enum!
   ) {
     update_posts_by_pk(
-      pk_columns: {postId: $postId}
+      pk_columns: {id: $id}
       _set: {
         body: $body
         imageUrl: $imageUrl
         privacy: $privacy
       }
     ) {
-      postId
+      id
     }
   }
 `;
