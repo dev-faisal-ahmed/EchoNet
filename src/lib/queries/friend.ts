@@ -6,24 +6,26 @@
   {email:{_neq:$email}} to get all the user except the current
   
   to prevent getting user who has sent request to current user I used 
-    {sendRequests: {receiverEmail: {_eq: $email}}}
+    {sentRequests: {receiver: {email: {_eq: $email}}}},
   to prevent getting user who has received request from current user I used 
-    {getRequest:{senderEmail:{_eq:$email}}}
+    {friendRequests: {sender: {email: {_eq: $email}}}}
   
-  This I am getting those user who are not friend of current user or requested by current user or got request by current user
+  This how I am getting those user who are not friend of current user or requested by current user or got request by current user
 */
 
 export const GET_SUGGESTED_FRIENDS = `
   query GetSuggestedFriends($email: String!) {
-    users(where: 
+    users(
+      where: 
       {email: {_neq: $email}, 
         _not: {
           _or: [
-            {sendRequests: {receiverEmail: {_eq: $email}}}
-            {getRequest:{senderEmail:{_eq:$email}}}
+            {sentRequests: {receiver: {email: {_eq: $email}}}}, 
+            {friendRequests: {sender: {email: {_eq: $email}}}}
           ]
         }
-    }) {
+      }
+    ) {
       name
       email
     }
@@ -34,6 +36,22 @@ export const ADD_FRIEND = `
   mutation AddFriend($receiverEmail: String!) {
     insert_friends_one(object: {receiverEmail: $receiverEmail}) {
       receiverEmail
+    }
+  }
+`;
+
+export const GET_FRIEND_REQUESTS = `
+  query GetFriendRequests($email: String!) {
+    friends(
+      where: {
+        receiver: {email: {_eq: $email}}, 
+        status: {_eq: REQUESTED}
+      }
+    ) {
+      sender {
+        name
+        email
+      }
     }
   }
 `;
@@ -54,18 +72,18 @@ export const GET_FRIENDSHIP = `
 
 export const GET_SENT_REQUEST = `
   query GetSentRequest($email: String!) {
-  friends(
-    where: {
-      senderEmail: {_eq: $email}, 
-      status: {_eq: REQUESTED}
-    }
-  ) {
-    receiver {
-      name
-      email
+    friends(
+      where: {
+        sender: {email: {_eq: $email}}, 
+        status: {_eq: REQUESTED}
+      }
+    ) {
+      receiver {
+        name
+        email
+      }
     }
   }
-}
 
 `;
 
@@ -79,22 +97,6 @@ export const CANCEL_FRIEND_REQUEST = `
       receiverEmail: $receiverEmail
     ) {
       receiverEmail
-    }
-  }
-`;
-
-export const GET_FRIEND_REQUESTS = `
-  query GetFriendRequests ($email: String!) {
-    friends(
-      where: {
-        receiverEmail : {_eq: $email}
-        status: {_eq: REQUESTED}
-      }
-    ) {
-      sender {
-        name
-        email
-      }
     }
   }
 `;
