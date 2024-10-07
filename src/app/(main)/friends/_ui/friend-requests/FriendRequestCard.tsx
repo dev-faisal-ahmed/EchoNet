@@ -10,11 +10,29 @@ import {
 
 import { useAcceptFriendRequest } from '../../_lib/useAcceptFriendRequest';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
+import { useDeleteFriend } from '../../_lib/useDeleteFriend';
+import { queryClient } from '@/providers/QueryClient';
 import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
+import { TAGS } from '@/data/tags';
 
 export function FriendRequestCard({ id, name, email }: IFriend) {
-  const { handleAcceptFriendRequest, isPending } = useAcceptFriendRequest();
+  const { handleAcceptFriendRequest, isPending: isAccepting } =
+    useAcceptFriendRequest();
+
+  const { handleDeleteFriend, isPending: isRejecting } = useDeleteFriend(() => {
+    queryClient.invalidateQueries({ queryKey: [TAGS.FRIEND_REQUESTS] });
+    queryClient.invalidateQueries({ queryKey: [TAGS.SUGGESTED_FRIENDS] });
+  });
+
+  const onRejectFriendRequest = () => {
+    handleDeleteFriend({
+      friendId: id,
+      loadingMessage: 'Rejecting Request...',
+      successMessage: 'Friend Request Rejected',
+      errorMessage: 'Failed to reject friend request',
+    });
+  };
 
   return (
     <Card>
@@ -28,14 +46,18 @@ export function FriendRequestCard({ id, name, email }: IFriend) {
       <CardContent className='flex items-center gap-4'>
         <Button
           onClick={() => handleAcceptFriendRequest(id)}
-          disabled={isPending}
+          disabled={isAccepting}
           className='w-full'
         >
-          {isPending ? 'Accepting...' : 'Accept'}
+          {isAccepting ? 'Accepting...' : 'Accept'}
         </Button>
 
-        <Button className='w-full' variant='outline'>
-          {false ? 'Rejecting...' : 'Reject'}
+        <Button
+          onClick={onRejectFriendRequest}
+          className='w-full'
+          variant='outline'
+        >
+          {isRejecting ? 'Rejecting...' : 'Reject'}
         </Button>
       </CardContent>
     </Card>
