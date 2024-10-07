@@ -75,6 +75,14 @@ export const GET_SENT_REQUEST = `
   }
 `;
 
+export const ACCEPT_FRIEND_REQUEST = `
+  mutation AcceptFriendRequest($requestId: uuid!) {
+    update_friends_by_pk(pk_columns: {id: $requestId}) {
+      id
+    }
+  }
+`;
+
 export const GET_FRIENDSHIP = `
   query GetFriendShip (
   $receiverEmail:String!, 
@@ -93,22 +101,6 @@ export const DELETE_FRIEND_REQUEST = `
   mutation DeleteFriendRequest($id: uuid!) {
     delete_friends_by_pk(id: $id) {
       id
-    }
-  }
-`;
-
-export const ACCEPT_FRIEND_REQUEST = `
-  mutation AcceptFriendRequest(
-    $senderEmail: String!, 
-    $userEmail: String!
-  ) {
-    update_friends_by_pk(
-      pk_columns: {
-        senderEmail: $senderEmail, 
-        receiverEmail: $userEmail
-      }
-    ) {
-      senderEmail
     }
   }
 `;

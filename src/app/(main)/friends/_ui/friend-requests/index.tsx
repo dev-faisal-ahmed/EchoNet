@@ -17,14 +17,14 @@ export function FriendRequests() {
 
   if (isPending) return <FriendLoader />;
 
-  return (
+  return friendRequests?.length ? (
     <section>
       <h3 className='font-semibold'>Friend Requests.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-        {friendRequests?.map(({ sender: { email, name } }) => (
-          <FriendRequestCard key={email} name={name} email={email} />
+        {friendRequests?.map(({ id, sender: { email, name } }) => (
+          <FriendRequestCard key={id} id={id} name={name} email={email} />
         ))}
       </div>
     </section>
-  );
+  ) : null;
 }

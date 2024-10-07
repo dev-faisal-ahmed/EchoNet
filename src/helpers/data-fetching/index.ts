@@ -6,7 +6,8 @@ export * from './post/addPost';
 
 // friend
 export * from './friend/deleteFriendRequest';
+export * from './friend/acceptFriendRequest';
 export * from './friend/getSuggestedFriend';
-export * from './friend/getSentRequests';
 export * from './friend/getFriendRequests';
+export * from './friend/getSentRequests';
 export * from './friend/addFriend';

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardContent,
@@ -6,11 +8,14 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+import { useAcceptFriendRequest } from '../../_lib/useAcceptFriendRequest';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
 
-export function FriendRequestCard({ name, email }: IFriend) {
+export function FriendRequestCard({ id, name, email }: IFriend) {
+  const { handleAcceptFriendRequest, isPending } = useAcceptFriendRequest();
+
   return (
     <Card>
       <CardHeader className='flex-row gap-4'>
@@ -21,7 +26,14 @@ export function FriendRequestCard({ name, email }: IFriend) {
         </div>
       </CardHeader>
       <CardContent className='flex items-center gap-4'>
-        <Button className='w-full'>{false ? 'Accepting...' : 'Accept'}</Button>
+        <Button
+          onClick={() => handleAcceptFriendRequest(id)}
+          disabled={isPending}
+          className='w-full'
+        >
+          {isPending ? 'Accepting...' : 'Accept'}
+        </Button>
+
         <Button className='w-full' variant='outline'>
           {false ? 'Rejecting...' : 'Reject'}
         </Button>
