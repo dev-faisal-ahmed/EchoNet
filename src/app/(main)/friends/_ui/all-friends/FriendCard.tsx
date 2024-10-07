@@ -7,9 +7,12 @@ import {
 } from '@/components/ui/card';
 
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
+import { useDeleteFriend } from '../../_lib/useDeleteFriend';
+import { queryClient } from '@/providers/QueryClient';
 import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
 import { useGetUser } from '@/hooks';
+import { TAGS } from '@/data';
 
 interface IProps {
   id: string;
@@ -17,10 +20,23 @@ interface IProps {
   receiver: IFriend;
 }
 
-export function FriendCard({ sender, receiver }: IProps) {
+export function FriendCard({ id, sender, receiver }: IProps) {
   const user = useGetUser();
-
   const friend = user?.email === sender.email ? receiver : sender;
+
+  const { handleDeleteFriend, isPending: isRemoving } = useDeleteFriend(() => {
+    queryClient.invalidateQueries({ queryKey: [TAGS.ALL_FRIENDS] });
+    queryClient.invalidateQueries({ queryKey: [TAGS.SUGGESTED_FRIENDS] });
+  });
+
+  const onRemoveFriend = () => {
+    handleDeleteFriend({
+      friendId: id,
+      loadingMessage: 'Removing Friend...',
+      successMessage: 'Friend Removed',
+      errorMessage: 'Failed to remove friend',
+    });
+  };
 
   return (
     <Card>
@@ -34,8 +50,8 @@ export function FriendCard({ sender, receiver }: IProps) {
         </div>
       </CardHeader>
       <CardContent className='flex items-center gap-4'>
-        <Button className='w-full' variant='outline'>
-          {false ? 'Removing Friend...' : 'Remove Friend'}
+        <Button onClick={onRemoveFriend} className='w-full' variant='outline'>
+          {isRemoving ? 'Removing Friend...' : 'Remove Friend'}
         </Button>
       </CardContent>
     </Card>
