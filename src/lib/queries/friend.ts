@@ -26,6 +26,7 @@ export const GET_SUGGESTED_FRIENDS = `
         }
       }
     ) {
+      id
       name
       email
     }
@@ -33,9 +34,9 @@ export const GET_SUGGESTED_FRIENDS = `
 `;
 
 export const ADD_FRIEND = `
-  mutation AddFriend($receiverEmail: String!) {
-    insert_friends_one(object: {receiverEmail: $receiverEmail}) {
-      receiverEmail
+  mutation AddFriend($receiverId: uuid!) {
+    insert_friends_one(object: {receiverId: $receiverId}) {
+      id
     }
   }
 `;
@@ -48,7 +49,25 @@ export const GET_FRIEND_REQUESTS = `
         status: {_eq: REQUESTED}
       }
     ) {
+      id
       sender {
+        name
+        email
+      }
+    }
+  }
+`;
+
+export const GET_SENT_REQUEST = `
+  query GetSentRequest($email: String!) {
+    friends(
+      where: {
+        sender: {email: {_eq: $email}}, 
+        status: {_eq: REQUESTED}
+      }
+    ) {
+      id
+      receiver {
         name
         email
       }
@@ -70,33 +89,10 @@ export const GET_FRIENDSHIP = `
   }
 `;
 
-export const GET_SENT_REQUEST = `
-  query GetSentRequest($email: String!) {
-    friends(
-      where: {
-        sender: {email: {_eq: $email}}, 
-        status: {_eq: REQUESTED}
-      }
-    ) {
-      receiver {
-        name
-        email
-      }
-    }
-  }
-
-`;
-
-export const CANCEL_FRIEND_REQUEST = `
-  mutation CancelFriendRequest (
-    $senderEmail: String!
-    $receiverEmail: String!
-  ) {
-    delete_friends_by_pk(
-      senderEmail: $senderEmail
-      receiverEmail: $receiverEmail
-    ) {
-      receiverEmail
+export const DELETE_FRIEND_REQUEST = `
+  mutation DeleteFriendRequest($id: uuid!) {
+    delete_friends_by_pk(id: $id) {
+      id
     }
   }
 `;

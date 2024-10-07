@@ -20,8 +20,8 @@ export function SuggestedFriends() {
     <section>
       <h3 className='mt-6 font-semibold'>Suggested Friends.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-        {suggestedFriends?.map(({ email, name }) => (
-          <SuggestedFriendCard key={email} email={email} name={name} />
+        {suggestedFriends?.map(({ id, email, name }) => (
+          <SuggestedFriendCard key={id} id={id} email={email} name={name} />
         ))}
       </div>
     </section>

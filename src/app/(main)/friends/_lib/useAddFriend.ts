@@ -14,12 +14,12 @@ export const useAddFriend = () => {
     },
   });
 
-  const handleAddFriend = async (receiverEmail: string) => {
+  const handleAddFriend = async (friendId: string) => {
     const id = toast.loading('Adding friend...!');
     catchAsync({
       id,
       tryFn: async () => {
-        const response = await addFriendMutation.mutateAsync(receiverEmail);
+        const response = await addFriendMutation.mutateAsync(friendId);
         if (response.error) throw Error(response.error);
         toast.success(response.success, { id });
       },

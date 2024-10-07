@@ -13,7 +13,7 @@ import { useAddFriend } from '../../_lib/useAddFriend';
 import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
 
-export function SuggestedFriendCard({ email, name }: IFriend) {
+export function SuggestedFriendCard({ id, email, name }: IFriend) {
   const { handleAddFriend, isPending } = useAddFriend();
 
   return (
@@ -27,7 +27,7 @@ export function SuggestedFriendCard({ email, name }: IFriend) {
       </CardHeader>
       <CardContent>
         <Button
-          onClick={() => handleAddFriend(email)}
+          onClick={() => handleAddFriend(id)}
           disabled={isPending}
           className='w-full'
         >

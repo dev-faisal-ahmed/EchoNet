@@ -20,8 +20,8 @@ export function SentRequests() {
     <section className='mt-6'>
       <h3 className='font-semibold'>Sent Requests.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-        {sentRequests?.map(({ receiver: { name, email } }) => (
-          <SentRequestCard key={email} name={name} email={email} />
+        {sentRequests?.map(({ id, receiver: { name, email } }) => (
+          <SentRequestCard key={id} id={id} name={name} email={email} />
         ))}
       </div>
     </section>

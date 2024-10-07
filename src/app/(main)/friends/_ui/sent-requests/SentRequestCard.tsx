@@ -10,10 +10,8 @@ import { useCancelRequest } from '../../_lib/useCancelRequest';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
-import { useGetUser } from '@/hooks';
 
-export function SentRequestCard({ name, email }: IFriend) {
-  const user = useGetUser();
+export function SentRequestCard({ id, name, email }: IFriend) {
   const { handleCancelRequest, isPending } = useCancelRequest();
 
   return (
@@ -28,12 +26,7 @@ export function SentRequestCard({ name, email }: IFriend) {
         </CardHeader>
         <CardContent>
           <Button
-            onClick={() =>
-              handleCancelRequest({
-                senderEmail: user?.email as string,
-                receiverEmail: email,
-              })
-            }
+            onClick={() => handleCancelRequest(id)}
             disabled={isPending}
             className='w-full'
             variant='outline'
