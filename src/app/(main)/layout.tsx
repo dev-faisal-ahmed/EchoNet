@@ -19,7 +19,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
   if (session.status !== 'authenticated') return <SidebarLoader />;
 
   return (
-    <main className='flex gap-6'>
+    <main className='flex'>
       <Sidebar className='hidden lg:grid' />
       <main className='w-full px-6 py-6'>
         <Topbar />

@@ -19,7 +19,7 @@ export function PostCard({
 }: IPost) {
   const { email } = useGetUser()!;
   return (
-    <Card className='mx-auto w-full max-w-2xl'>
+    <Card className='mx-auto w-full'>
       {/* card header */}
       <CardHeader className='flex flex-row gap-4'>
         <ProfileIcon name={creator.name} />
