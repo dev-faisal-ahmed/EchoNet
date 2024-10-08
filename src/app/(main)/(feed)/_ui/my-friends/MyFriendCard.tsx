@@ -1,18 +1,13 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
+import { SendHorizontalIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
 import { useGetUser } from '@/hooks';
 
 interface IProps {
   id: string;
-  sender: IFriend;
   receiver: IFriend;
+  sender: IFriend;
 }
 
 export function MyFriendCard({ sender, receiver }: IProps) {
@@ -20,14 +15,20 @@ export function MyFriendCard({ sender, receiver }: IProps) {
   const friend = user?.email === sender.email ? receiver : sender;
 
   return (
-    <Card>
-      <CardHeader className='flex-row gap-2'>
-        <ProfileIcon name={friend.name} />
+    <div className='cursor-pointer border-b px-4 pb-4'>
+      <div className='flex gap-3'>
         <div>
-          <CardTitle>{friend.name}</CardTitle>
-          <CardDescription className='mt-2'>{friend.email}</CardDescription>
+          <ProfileIcon name={friend.name} />
         </div>
-      </CardHeader>
-    </Card>
+        <div>
+          <h3 className='text-sm font-semibold'>{friend.name}</h3>
+          <p className='mt-2 text-xs text-muted-foreground'>{friend.email}</p>
+        </div>
+      </div>
+
+      <Button className='mt-3 w-full gap-3' variant='outline'>
+        Chat <SendHorizontalIcon size={16} />
+      </Button>
+    </div>
   );
 }

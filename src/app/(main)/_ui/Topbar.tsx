@@ -63,7 +63,7 @@ export function Topbar() {
       <Logo />
       <div className='ml-auto'>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger>
             <ProfileIcon name={user?.name as string} />
           </DropdownMenuTrigger>
           <DropdownMenuContent
