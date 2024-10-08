@@ -10,6 +10,7 @@ export const useAcceptFriendRequest = () => {
     mutationFn: acceptFriendRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [TAGS.FRIEND_REQUESTS] });
+      queryClient.invalidateQueries({ queryKey: [TAGS.ALL_FRIENDS] });
     },
   });
 
