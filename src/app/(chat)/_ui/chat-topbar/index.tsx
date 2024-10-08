@@ -16,21 +16,16 @@ import {
 
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { AlignJustifyIcon, LogOutIcon } from 'lucide-react';
-import { getMyChats } from '@/helpers/data-fetching';
+import { useGetChatRooms } from '@/hooks/data-fetching';
 import { ChatTopbarLink } from './ChatTopbarLink';
-import { useQuery } from '@tanstack/react-query';
 import { Logo } from '@/components/shared/Logo';
 import { Button } from '@/components/ui/button';
 import { signOut } from 'next-auth/react';
 import { useGetUser } from '@/hooks';
-import { TAGS } from '@/data';
 
 export function ChatTopbar() {
   const user = useGetUser();
-  const { data: chats, isPending } = useQuery({
-    queryFn: () => getMyChats(user?.id as string),
-    queryKey: [TAGS.MY_CHATS],
-  });
+  const { chats, isPending } = useGetChatRooms();
 
   if (isPending) return 'Loading';
 

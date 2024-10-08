@@ -1,16 +1,11 @@
 'use client';
 
-import { getMyFriends } from '@/helpers/data-fetching';
-import { useQuery } from '@tanstack/react-query';
 import { FriendLoader } from '../FriendLoader';
 import { FriendCard } from './FriendCard';
-import { TAGS } from '@/data';
+import { useGetMyFriends } from '@/hooks';
 
 export function AllFriends() {
-  const { data: friends, isPending } = useQuery({
-    queryFn: getMyFriends,
-    queryKey: [TAGS.ALL_FRIENDS],
-  });
+  const { friends, isPending } = useGetMyFriends();
 
   if (isPending) return <FriendLoader className='mt-6' />;
 

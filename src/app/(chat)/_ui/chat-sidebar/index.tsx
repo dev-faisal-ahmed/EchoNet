@@ -1,19 +1,11 @@
 'use client';
 
-import { getMyChats } from '@/helpers/data-fetching';
-import { useQuery } from '@tanstack/react-query';
 import { Logo } from '@/components/shared/Logo';
+import { useGetChatRooms } from '@/hooks';
 import { ChatLink } from './ChatLink';
-import { useGetUser } from '@/hooks';
-import { TAGS } from '@/data';
 
 export function ChatSidebar() {
-  const user = useGetUser();
-
-  const { data: chats, isPending } = useQuery({
-    queryFn: () => getMyChats(user?.id as string),
-    queryKey: [TAGS.MY_CHATS],
-  });
+  const { chats, isPending } = useGetChatRooms();
 
   if (isPending) return 'Loading';
 
