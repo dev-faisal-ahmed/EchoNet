@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { GlobeIcon, ShieldCheckIcon } from 'lucide-react';
-import { getDateForPost } from '@/helpers/dateHelper';
+import { getFormattedDate } from '@/helpers/dateHelper';
 import { EPostPrivacy, IPost } from '@/lib/types';
 import { DeletePost } from './DeletePost';
 import { EditPost } from './EditPost';
@@ -31,7 +31,7 @@ export function PostCard({
             ) : (
               <ShieldCheckIcon size={20} />
             )}
-            {getDateForPost(createdAt)}
+            {getFormattedDate(createdAt)}
           </p>
         </div>
         {email === creator.email && (

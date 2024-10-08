@@ -21,7 +21,7 @@ export const formateDate = (date: string | Date) => {
   return `${months[month]} ${day}, ${year}`;
 };
 
-export const getDateForPost = (date: string | Date) => {
+export const getFormattedDate = (date: string | Date) => {
   const dateObj = new Date(date);
   const now = new Date();
   const postPublishTime = dateObj.getTime();
