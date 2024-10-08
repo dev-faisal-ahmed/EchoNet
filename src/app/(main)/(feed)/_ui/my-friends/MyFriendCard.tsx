@@ -1,12 +1,13 @@
-import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useGetUser } from '@/hooks';
+
+import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { IFriend } from '@/lib/types';
+import { useGetUser } from '@/hooks';
 
 interface IProps {
   id: string;
@@ -16,7 +17,7 @@ interface IProps {
 
 export function MyFriendCard({ sender, receiver }: IProps) {
   const user = useGetUser();
-  const friend = user?.name === sender.name ? receiver : sender;
+  const friend = user?.email === sender.email ? receiver : sender;
 
   return (
     <Card>

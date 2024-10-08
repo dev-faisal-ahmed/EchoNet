@@ -12,7 +12,7 @@ export function MyFriends() {
   });
 
   return (
-    <section className='hidden w-full max-w-sm lg:block'>
+    <section className='hidden w-full max-w-xs lg:block'>
       {friends?.length ? (
         <div className='flex flex-col gap-4'>
           {friends?.map((friend) => (

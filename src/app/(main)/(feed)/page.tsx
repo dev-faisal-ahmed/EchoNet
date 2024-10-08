@@ -17,12 +17,14 @@ export default function HomePage() {
   if (isLoading) return <FeedLoader />;
 
   return (
-    <main className='flex justify-center gap-6'>
-      <section className='w-full max-w-2xl'>
-        <AddPost />
-        <section className='mt-8 flex flex-col gap-6'>
-          {posts?.map((post) => <PostCard key={post.id} {...post} />)}
-        </section>
+    <main className='flex gap-6'>
+      <section className='w-full'>
+        <div className='mx-auto w-full max-w-2xl'>
+          <AddPost />
+          <section className='mt-8 flex flex-col gap-6'>
+            {posts?.map((post) => <PostCard key={post.id} {...post} />)}
+          </section>
+        </div>
       </section>
       <MyFriends />
     </main>

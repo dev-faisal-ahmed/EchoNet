@@ -8,7 +8,7 @@ export const SING_UP_MUTATION = `
 `;
 
 export const SINGUP_ACTION = `
-  mutation SignUpAction(
+  mutation sign_up(
     $name:String!, 
     $email:String!, 
     $password:String!

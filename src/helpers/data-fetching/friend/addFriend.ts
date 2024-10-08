@@ -1,10 +1,10 @@
 import { graphQlClient } from '@/helpers/axios-client';
-import { ADD_FRIEND } from '@/lib/queries';
+import { ADD_FRIEND_REQUEST } from '@/lib/queries';
 
 export const addFriend = async (receiverId: string) => {
-  const response = await graphQlClient(ADD_FRIEND, { receiverId });
-  const errors = response?.errors;
+  const response = await graphQlClient(ADD_FRIEND_REQUEST, { receiverId });
+  const data = response?.data?.add_friend;
+  if (!data?.success) throw new Error(data?.message);
 
-  if (errors?.length) return { error: errors[0] };
-  return { success: 'Sent friend request successfully' };
+  return data;
 };

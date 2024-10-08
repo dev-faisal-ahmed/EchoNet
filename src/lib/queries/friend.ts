@@ -34,9 +34,18 @@ export const GET_SUGGESTED_FRIENDS = `
 `;
 
 export const ADD_FRIEND = `
-  mutation AddFriend($receiverId: uuid!) {
-    insert_friends_one(object: {receiverId: $receiverId}) {
+  mutation AddFriend($senderId: uuid!, $receiverId: uuid!) {
+    insert_friends_one(object: {senderId: $senderId, receiverId: $receiverId}) {
       id
+    }
+  }
+`;
+
+export const ADD_FRIEND_REQUEST = `
+  mutation AddFriend($receiverId: uuid!) {
+    add_friend(receiverId: $receiverId) {
+      success
+      message
     }
   }
 `;
@@ -73,16 +82,17 @@ export const ACCEPT_FRIEND_REQUEST = `
   }
 `;
 
-export const GET_FRIENDSHIP = `
-  query GetFriendShip (
-  $receiverEmail:String!, 
-  $senderEmail:String!
-  ){
-    friends_by_pk(
-    receiverEmail: $receiverEmail, 
-    senderEmail: $senderEmail
+export const FRIEND_SHIP_EXISTS = `
+  query FindFriendShip ($senderId: uuid!, $receiverId: uuid!) {
+    friends(
+      where : {
+        _or : [
+          {senderId : {_eq: $senderId}, receiverId: {_eq: $receiverId}}, 
+          {senderId : {_eq: $receiverId}, receiverId: {_eq: $senderId}}
+        ]
+      }
     ) {
-      senderEmail
+      id
     }
   }
 `;
