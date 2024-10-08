@@ -1,6 +1,6 @@
 'use client';
 
-import { getMyChats } from '@/helpers/data-fetching/chat/getMyChats';
+import { getMyChats } from '@/helpers/data-fetching';
 import { useQuery } from '@tanstack/react-query';
 import { Logo } from '@/components/shared/Logo';
 import { ChatLink } from './ChatLink';

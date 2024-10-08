@@ -3,6 +3,7 @@
 import { SidebarLoader } from '../(main)/_ui/SidebarLoader';
 import { PropsWithChildren, useEffect } from 'react';
 import { ChatSidebar } from './_ui/chat-sidebar';
+import { ChatTopbar } from './_ui/chat-topbar';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -19,7 +20,10 @@ export default function ChatLayout({ children }: PropsWithChildren) {
   return (
     <main className='flex'>
       <ChatSidebar />
-      <main className='w-full px-6 py-6'>{children}</main>
+      <main className='w-full px-6 py-6'>
+        <ChatTopbar />
+        {children}
+      </main>
     </main>
   );
 }
