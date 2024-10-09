@@ -22,5 +22,5 @@ export const singupAction = async ({
     apiSecret: API_SECRET,
   });
 
-  return response?.data;
+  return response?.data?.sign_up;
 };

@@ -16,7 +16,7 @@ export const SINGUP_ACTION = `
     $password: String!
     $apiSecret: String!
   ) {
-    SignupAction(
+    sign_up(
       name: $name
       email: $email
       password: $password
@@ -24,6 +24,14 @@ export const SINGUP_ACTION = `
     ) {
       success
       message
+    }
+  }
+`;
+
+export const IS_USER_EXIST = `
+  query IsUSeExist($email: String!) {
+    users(where: {email: {_eq: $email}}) {
+      email
     }
   }
 `;

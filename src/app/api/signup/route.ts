@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 
+import { IS_USER_EXIST, SING_UP_MUTATION } from '@/lib/queries';
 import { NextRequest, NextResponse } from 'next/server';
 import { graphQlServerConnector } from '@/helpers';
 import { catchAsync } from '@/helpers/catchAsync';
-import { SING_UP_MUTATION } from '@/lib/queries';
 import { API_SECRET, SALT } from '@/config';
 
 export async function POST(req: NextRequest) {
@@ -18,6 +18,11 @@ export async function POST(req: NextRequest) {
 
       // to prevent any random person from signing up by just sending a request to this endpoint
       if (apiSecret !== API_SECRET) throw new Error('Invalid API Secret');
+
+      // checking if user exist or not
+      const response = await graphQlServerConnector(IS_USER_EXIST, { email });
+
+      if (response?.data?.users?.[0]) throw new Error('User already exist');
 
       const hashedPassword = await bcrypt.hash(password, SALT);
       const result = await graphQlServerConnector(SING_UP_MUTATION, {

@@ -46,10 +46,9 @@ export const useSignup = () => {
       tryFn: async () => {
         setIsLoading(true);
         const response = await singupAction(formData);
-        const responseData = response?.SignupAction;
 
-        if (!responseData?.success) throw new Error(responseData?.message);
-        toast.success(responseData?.message, { id });
+        if (!response?.success) throw new Error(response?.message);
+        toast.success(response?.message, { id });
         router.push('/login');
       },
       finallyFn: () => {
