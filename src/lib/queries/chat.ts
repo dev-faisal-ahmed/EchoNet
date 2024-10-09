@@ -45,6 +45,23 @@ export const GET_MY_CHATS = `
   }
 `;
 
+export const GET_CHAT_ROOM_INFO = `
+  query GetChatRoomInfoById($id: uuid!) {
+    chat_rooms_by_pk(id: $id) {
+      user1 {
+        id
+        name
+        email
+      }
+      user2 {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
+
 // message related queries
 export const SEND_MESSAGE = `
   mutation SendMessage(
