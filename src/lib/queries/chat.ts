@@ -66,7 +66,12 @@ export const SEND_MESSAGE = `
 
 export const GET_MESSAGES = `
   query GetMessages($chatRoomId: uuid!) {
-    messages(where: {chatRoomId: {_eq: $chatRoomId}}) {
+    messages(
+      where: {
+        chatRoomId: {_eq: $chatRoomId}
+      }, 
+      order_by: {createdAt: desc}
+    ) {
       id
       body
       imageUrl

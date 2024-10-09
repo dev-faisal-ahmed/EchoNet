@@ -13,7 +13,12 @@ export function MessageCard({ sender, body, createdAt, imageUrl }: IMessage) {
     <div className={cn('flex w-2/3', isMe && 'ml-auto justify-end')}>
       <div className='flex gap-4'>
         {!isMe && <ProfileIcon name={sender.name} />}
-        <div className='rounded-md bg-primary-foreground p-3'>
+        <div
+          className={cn(
+            'rounded-md bg-primary-foreground p-3',
+            isMe && 'bg-primary/60',
+          )}
+        >
           {body && <p>{body}</p>}
           {imageUrl && (
             <Image
@@ -24,7 +29,12 @@ export function MessageCard({ sender, body, createdAt, imageUrl }: IMessage) {
               alt='image'
             />
           )}
-          <p className='mt-2 text-right text-xs text-muted-foreground'>
+          <p
+            className={cn(
+              'mt-2 text-right text-xs text-muted-foreground',
+              isMe && 'text-white/70',
+            )}
+          >
             {getFormattedDate(createdAt)}
           </p>
         </div>
