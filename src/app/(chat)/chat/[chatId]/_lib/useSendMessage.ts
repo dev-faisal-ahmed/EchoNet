@@ -50,9 +50,7 @@ export const useSendMessage = (chatRoomId: string) => {
   };
 
   const handleSendMessage = form.handleSubmit(async (formData) => {
-    const id = toast.loading('Sending message...');
     catchAsync({
-      id,
       async tryFn() {
         // first of all uploading image if there's any
 
@@ -74,11 +72,14 @@ export const useSendMessage = (chatRoomId: string) => {
         });
 
         if (!response) throw new Error('Unable to send message');
-        toast.success('Message sent successfully', { id });
-
         // resetting the form and removing the image
         form.reset();
         onImageRemove();
+      },
+      catchFn(error) {
+        let message = 'Something went wrong';
+        if (error instanceof Error) message = error.message;
+        toast.error(message, { duration: 1000 });
       },
     });
   });
