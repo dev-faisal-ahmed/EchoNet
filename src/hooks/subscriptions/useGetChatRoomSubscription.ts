@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useGetUser } from '../useGetUser';
-import { wsClient } from '@/helpers/wsClient';
 import { GET_CHAT_ROOM_SUBSCRIPTION } from '@/lib/queries';
 import { queryClient } from '@/providers/QueryClient';
+import { wsClient } from '@/helpers/wsClient';
+import { useGetUser } from '../useGetUser';
+import { useEffect } from 'react';
 import { TAGS } from '@/data';
 
 export const useGetChatRoomSubscription = () => {
@@ -26,5 +26,9 @@ export const useGetChatRoomSubscription = () => {
         complete: () => {},
       },
     );
-  });
+
+    return () => {
+      wsClient.terminate();
+    };
+  }, [user?.id]);
 };
