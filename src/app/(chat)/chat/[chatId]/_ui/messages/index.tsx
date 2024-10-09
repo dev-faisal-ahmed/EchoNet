@@ -1,12 +1,12 @@
 'use client';
 
 import { getMessages } from '@/helpers/data-fetching';
+import { useGetMessagesSubscription } from '@/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { MessageCard } from './MessageCard';
 import { useEffect, useRef } from 'react';
 import { TAGS } from '@/data';
-import { useGetMessagesSubscription } from '@/hooks';
 
 export function Messages() {
   const { chatId } = useParams();

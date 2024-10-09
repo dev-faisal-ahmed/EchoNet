@@ -25,9 +25,9 @@ import { useGetUser } from '@/hooks';
 
 export function ChatTopbar() {
   const user = useGetUser();
-  const { chats, isPending } = useGetChatRooms();
+  const { chats, isLoading } = useGetChatRooms();
 
-  if (isPending) return 'Loading';
+  if (isLoading) return 'Loading';
 
   return (
     <nav className='mb-6 flex w-full items-center gap-4 md:hidden'>

@@ -1,6 +1,7 @@
 'use client';
 
 import { PropsWithChildren, useEffect } from 'react';
+import { useGetChatRoomSubscription } from '@/hooks';
 import { ChatSidebar } from './_ui/chat-sidebar';
 import { ChatTopbar } from './_ui/chat-topbar';
 import { useSession } from 'next-auth/react';
@@ -13,6 +14,8 @@ export default function ChatLayout({ children }: PropsWithChildren) {
   useEffect(() => {
     if (session.status === 'unauthenticated') router.push('/login');
   }, [session.status, router]);
+
+  useGetChatRoomSubscription();
 
   // to prevent showing the page before the session is loaded
   if (session.status !== 'authenticated') return 'Loading';

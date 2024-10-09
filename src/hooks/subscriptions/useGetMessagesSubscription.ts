@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GET_MESSAGES_SUBSCRIPTION } from '@/lib/queries';
 import { queryClient } from '@/providers/QueryClient';
 import { wsClient } from '@/helpers/wsClient';
@@ -12,19 +11,14 @@ export const useGetMessagesSubscription = (chatRoomId: string) => {
       {
         next: ({ data }) => {
           queryClient.setQueryData([TAGS.MESSAGES, chatRoomId], () => {
-            console.log({ data });
             return data?.messages;
           });
-        },
-        complete: () => {
-          console.log('completed');
         },
         error: (error) => {
           console.log(error);
         },
+        complete: () => {},
       },
     );
-
-    return () => {};
   }, [chatRoomId]);
 };
