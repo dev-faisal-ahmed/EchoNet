@@ -19,7 +19,7 @@ export default function ConversationPage() {
   });
 
   const friend =
-    user.id === chatRoomInfo?.user1.id
+    user?.id === chatRoomInfo?.user1.id
       ? chatRoomInfo?.user2
       : chatRoomInfo?.user1;
 
