@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button';
 import { IFriend } from '@/lib/types';
 import { useGetUser } from '@/hooks';
 import { TAGS } from '@/data';
+import { LoaderIcon, SendHorizontalIcon, UserMinus } from 'lucide-react';
+import { useNavigateToChatRoom } from '@/hooks/useNavigateToChatRoom';
 
 interface IProps {
   id: string;
@@ -23,6 +25,7 @@ interface IProps {
 export function FriendCard({ id, sender, receiver }: IProps) {
   const user = useGetUser();
   const friend = user?.email === sender.email ? receiver : sender;
+  const { navigate, isLoading } = useNavigateToChatRoom();
 
   const { handleDeleteFriend, isPending: isRemoving } = useDeleteFriend(() => {
     queryClient.invalidateQueries({ queryKey: [TAGS.ALL_FRIENDS] });
@@ -51,7 +54,19 @@ export function FriendCard({ id, sender, receiver }: IProps) {
       </CardHeader>
       <CardContent className='flex items-center gap-4'>
         <Button onClick={onRemoveFriend} className='w-full' variant='outline'>
-          {isRemoving ? 'Removing Friend...' : 'Remove Friend'}
+          {isRemoving ? <LoaderIcon size={16} /> : <UserMinus size={16} />}
+        </Button>
+        <Button
+          onClick={() => navigate(friend.id)}
+          disabled={isLoading}
+          className='w-full'
+          variant='outline'
+        >
+          {isLoading ? (
+            <LoaderIcon size={16} />
+          ) : (
+            <SendHorizontalIcon size={16} />
+          )}
         </Button>
       </CardContent>
     </Card>

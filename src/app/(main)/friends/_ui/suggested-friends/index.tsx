@@ -14,7 +14,7 @@ export function SuggestedFriends() {
     queryKey: [TAGS.SUGGESTED_FRIENDS],
   });
 
-  if (isPending) return <FriendLoader />;
+  if (isPending) return <FriendLoader className='mt-6' />;
 
   return suggestedFriends?.length ? (
     <section>

@@ -17,7 +17,7 @@ export function SentRequests() {
   if (isPending) return <FriendLoader className='mt-6' />;
 
   return sentRequests?.length ? (
-    <section className='mt-6'>
+    <section>
       <h3 className='font-semibold'>Sent Requests.</h3>
       <div className='mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
         {sentRequests?.map(({ id, receiver: { name, email } }) => (

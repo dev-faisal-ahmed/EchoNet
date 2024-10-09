@@ -5,7 +5,7 @@ import { AllFriends } from './_ui/all-friends';
 
 export default function FriendsPage() {
   return (
-    <main>
+    <main className='flex flex-col gap-6'>
       <FriendRequests />
       <SuggestedFriends />
       <SentRequests />
