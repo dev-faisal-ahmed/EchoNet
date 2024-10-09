@@ -20,3 +20,21 @@ export const GET_MY_CHATS = `
     }
   }
 `;
+
+export const SEND_MESSAGE = `
+  mutation SendMessage(
+    $chatRoomId: uuid!, 
+    $body: String!, 
+    $imageUrl: String!
+  ) {
+    insert_messages_one(
+      object: {
+        chatRoomId: $chatRoomId, 
+        body: $body, 
+        imageUrl: $imageUrl
+      }
+    ) {
+      id
+    }
+  }
+`;
