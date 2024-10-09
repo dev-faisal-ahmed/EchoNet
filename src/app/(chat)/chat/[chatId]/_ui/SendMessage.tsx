@@ -17,6 +17,7 @@ export function SendMessage({ chatId }: IProps) {
     states: { imagePreview, isPending },
   } = useSendMessage(chatId);
 
+  // watching this value to disable submit button when body and image are empty
   const body = form.watch('body');
 
   return (

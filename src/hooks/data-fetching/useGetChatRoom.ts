@@ -5,10 +5,10 @@ import { TAGS } from '@/data';
 
 export const useGetChatRooms = () => {
   const user = useGetUser();
-  const { data: chats, isPending } = useQuery({
+  const { data: chats, isLoading } = useQuery({
     queryFn: () => getMyChats(user?.id as string),
     queryKey: [TAGS.MY_CHATS],
   });
 
-  return { chats, isPending };
+  return { chats, isLoading };
 };

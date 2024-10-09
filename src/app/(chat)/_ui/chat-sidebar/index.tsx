@@ -5,9 +5,9 @@ import { useGetChatRooms } from '@/hooks';
 import { ChatLink } from './ChatLink';
 
 export function ChatSidebar() {
-  const { chats, isPending } = useGetChatRooms();
+  const { chats, isLoading } = useGetChatRooms();
 
-  if (isPending) return 'Loading';
+  if (isLoading) return 'Loading';
 
   return (
     <aside className='sticky top-0 hidden h-screen w-full max-w-[280px] overflow-y-auto border-r p-6 md:block'>

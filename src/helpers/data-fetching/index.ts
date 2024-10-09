@@ -14,5 +14,6 @@ export * from './friend/getMyFriends';
 export * from './friend/addFriend';
 
 // chat
+export * from './chat/getMessages';
 export * from './chat/sendMessage';
 export * from './chat/getMyChats';

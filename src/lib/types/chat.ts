@@ -16,3 +16,14 @@ export interface IChatLink {
     createdAt: Date;
   }[];
 }
+
+export interface IMessage {
+  id: string;
+  body: string;
+  imageUrl: string;
+  sender: {
+    name: string;
+    id: string;
+  };
+  createdAt: Date;
+}

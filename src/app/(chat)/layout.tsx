@@ -1,6 +1,5 @@
 'use client';
 
-import { SidebarLoader } from '../(main)/_ui/SidebarLoader';
 import { PropsWithChildren, useEffect } from 'react';
 import { ChatSidebar } from './_ui/chat-sidebar';
 import { ChatTopbar } from './_ui/chat-topbar';
@@ -16,7 +15,7 @@ export default function ChatLayout({ children }: PropsWithChildren) {
   }, [session.status, router]);
 
   // to prevent showing the page before the session is loaded
-  if (session.status !== 'authenticated') return <SidebarLoader />;
+  if (session.status !== 'authenticated') return 'Loading';
   return (
     <main className='flex'>
       <ChatSidebar />
