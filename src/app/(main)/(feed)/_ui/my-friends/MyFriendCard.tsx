@@ -1,9 +1,9 @@
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { LoaderIcon, SendHorizontalIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigateToChatRoom } from '@/hooks';
 import { IFriend } from '@/lib/types';
 import { useGetUser } from '@/hooks';
-import { useNavigateToChatRoom } from '@/hooks/useNavigateToChatRoom';
 
 interface IProps {
   id: string;

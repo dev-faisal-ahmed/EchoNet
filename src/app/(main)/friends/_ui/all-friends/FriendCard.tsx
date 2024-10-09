@@ -6,15 +6,15 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+import { LoaderIcon, SendHorizontalIcon, UserMinus } from 'lucide-react';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { useDeleteFriend } from '../../_lib/useDeleteFriend';
 import { queryClient } from '@/providers/QueryClient';
 import { Button } from '@/components/ui/button';
+import { useNavigateToChatRoom } from '@/hooks';
 import { IFriend } from '@/lib/types';
 import { useGetUser } from '@/hooks';
 import { TAGS } from '@/data';
-import { LoaderIcon, SendHorizontalIcon, UserMinus } from 'lucide-react';
-import { useNavigateToChatRoom } from '@/hooks/useNavigateToChatRoom';
 
 interface IProps {
   id: string;
