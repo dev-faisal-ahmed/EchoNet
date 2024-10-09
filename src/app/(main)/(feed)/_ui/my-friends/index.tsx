@@ -10,7 +10,7 @@ export function MyFriends() {
 
   return (
     <section className='hidden w-full max-w-xs lg:block'>
-      <h3 className='mb-4 pl-4 font-semibold'>Chats.</h3>
+      <h3 className='mb-6 pl-4 font-semibold'>Chats.</h3>
       {friends?.length ? (
         <div className='flex flex-col gap-4'>
           {friends?.map((friend) => (

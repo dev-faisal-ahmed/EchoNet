@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import { MessageCard } from './MessageCard';
 import { useEffect, useRef } from 'react';
 import { TAGS } from '@/data';
+import { useGetMessagesSubscription } from '@/hooks';
 
 export function Messages() {
   const { chatId } = useParams();
@@ -16,6 +17,8 @@ export function Messages() {
     queryFn: () => getMessages(chatId as string),
   });
 
+  useGetMessagesSubscription(chatId as string);
+
   useEffect(() => {
     endMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -23,7 +26,7 @@ export function Messages() {
   if (isLoading) return 'loading';
 
   return (
-    <div className='mb-4 flex flex-col-reverse gap-4'>
+    <div className='my-4 flex flex-col-reverse gap-4'>
       <div ref={endMessageRef} />
       {messages?.map((message) => (
         <MessageCard key={message.id} {...message} />

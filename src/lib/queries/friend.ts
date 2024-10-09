@@ -16,12 +16,12 @@
 export const GET_SUGGESTED_FRIENDS = `
   query GetSuggestedFriends($email: String!) {
     users(
-      where: 
-      {email: {_neq: $email}, 
+      where: {
+        email: { _neq: $email }
         _not: {
           _or: [
-            {sentRequests: {receiver: {email: {_eq: $email}}}}, 
-            {friendRequests: {sender: {email: {_eq: $email}}}}
+            { sentRequests: { receiver: { email: { _eq: $email } } } }
+            { friendRequests: { sender: { email: { _eq: $email } } } }
           ]
         }
       }
@@ -35,7 +35,9 @@ export const GET_SUGGESTED_FRIENDS = `
 
 export const ADD_FRIEND = `
   mutation AddFriend($senderId: uuid!, $receiverId: uuid!) {
-    insert_friends_one(object: {senderId: $senderId, receiverId: $receiverId}) {
+    insert_friends_one(
+      object: { senderId: $senderId, receiverId: $receiverId }
+    ) {
       id
     }
   }
@@ -52,7 +54,7 @@ export const ADD_FRIEND_REQUEST = `
 
 export const GET_FRIEND_REQUESTS = `
   query GetFriendRequests($id: uuid!) {
-    friends(where: {receiverId: {_eq: $id}, status: {_eq: REQUESTED}}) {
+    friends(where: { receiverId: { _eq: $id }, status: { _eq: REQUESTED } }) {
       id
       sender {
         name
@@ -64,7 +66,7 @@ export const GET_FRIEND_REQUESTS = `
 
 export const GET_SENT_REQUEST = `
   query GetSentRequest($id: uuid!) {
-    friends(where: {senderId: {_eq: $id}, status: {_eq: REQUESTED}}) {
+    friends(where: { senderId: { _eq: $id }, status: { _eq: REQUESTED } }) {
       id
       receiver {
         name
@@ -76,19 +78,19 @@ export const GET_SENT_REQUEST = `
 
 export const ACCEPT_FRIEND_REQUEST = `
   mutation AcceptFriendRequest($requestId: uuid!) {
-    update_friends_by_pk(pk_columns: {id: $requestId}) {
+    update_friends_by_pk(pk_columns: { id: $requestId }) {
       id
     }
   }
 `;
 
 export const FRIEND_SHIP_EXISTS = `
-  query FindFriendShip ($senderId: uuid!, $receiverId: uuid!) {
+  query FindFriendShip($senderId: uuid!, $receiverId: uuid!) {
     friends(
-      where : {
-        _or : [
-          {senderId : {_eq: $senderId}, receiverId: {_eq: $receiverId}}, 
-          {senderId : {_eq: $receiverId}, receiverId: {_eq: $senderId}}
+      where: {
+        _or: [
+          { senderId: { _eq: $senderId }, receiverId: { _eq: $receiverId } }
+          { senderId: { _eq: $receiverId }, receiverId: { _eq: $senderId } }
         ]
       }
     ) {
@@ -107,7 +109,7 @@ export const DELETE_FRIEND_REQUEST = `
 
 export const GET_MY_FRIENDS = `
   query GetMyFriends {
-    friends(where: {status: {_eq: ACCEPTED}}) {
+    friends(where: { status: { _eq: ACCEPTED } }) {
       id
       sender {
         id
