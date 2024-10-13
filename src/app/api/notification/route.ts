@@ -1,7 +1,8 @@
+import { friendTemplate, messageTemplate } from '@/helpers/email/templates';
 import { GET_CHAT_ROOM_INFO, INSERT_NOTIFICATION } from '@/lib/queries';
 import { ENotificationType, IChatLink } from '@/lib/types';
+import { formateDate } from '@/helpers/dateHelper';
 import { graphQlServerConnector } from '@/helpers';
-import { friendTemplate } from '@/helpers/email/templates';
 import { sendEmail } from '@/helpers/email';
 
 export async function POST(request: Request) {
@@ -38,12 +39,12 @@ export async function POST(request: Request) {
 
         const emailResponse = await sendEmail({
           email: receiverEmail,
-          subject: 'EchoNet : Friend Request Notification',
+          subject: `EchoNet | ${senderName} sent you a friend request`,
           messageInHTML: message,
           messageInText: `${senderName} sent you a friend request`,
         });
 
-        if (!emailResponse.error) throw new Error(emailResponse.error);
+        if (emailResponse.error) throw new Error(emailResponse.error);
       }
 
       if (status === 'ACCEPTED') {
@@ -59,6 +60,23 @@ export async function POST(request: Request) {
         const responseData = response.data.insert_notifications_one;
         if (!responseData)
           throw new Error('Failed to insert into notification table');
+
+        const senderName = responseData?.invoker?.name;
+        const receiverEmail = responseData?.receiver?.email;
+
+        const message = friendTemplate({
+          senderName,
+          message: 'accepted your friend request',
+        });
+
+        const emailResponse = await sendEmail({
+          email: receiverEmail,
+          subject: `EchoNet | ${senderName} accepted your friend request`,
+          messageInHTML: message,
+          messageInText: `${senderName} accepted your friend request`,
+        });
+
+        if (emailResponse.error) throw new Error(emailResponse.error);
       }
     }
 
@@ -83,6 +101,11 @@ export async function POST(request: Request) {
           ? chatRoomInfo.user2
           : chatRoomInfo.user1;
 
+      const sender =
+        chatRoomInfo.user1.id === invokerId
+          ? chatRoomInfo.user1
+          : chatRoomInfo.user2;
+
       const receiverId = receiver.id;
 
       const response = await graphQlServerConnector(INSERT_NOTIFICATION, {
@@ -94,6 +117,25 @@ export async function POST(request: Request) {
       const responseData = response.data.insert_notifications_one;
       if (!responseData)
         throw new Error('Failed to insert into notification table');
+
+      // sending message
+      const messageResponse = await sendEmail({
+        email: receiver.email,
+        subject: `EchoNet | ${sender.name} sent you a message`,
+        messageInText: `
+        Message : ${data?.body} 
+        sent at : ${formateDate(data?.createdAt)}
+        `,
+
+        messageInHTML: messageTemplate({
+          message: data?.body,
+          imageUrl: data?.imageUrl,
+          date: formateDate(data?.createdAt),
+          senderName: sender.name,
+        }),
+      });
+
+      if (messageResponse.error) throw new Error(messageResponse.error);
     }
 
     return Response.json({

@@ -20,7 +20,7 @@ export default function LoginPage() {
   const { form, handleLogin, isLoading } = useLogin();
 
   return (
-    <PageTitle title='Signup'>
+    <PageTitle title='Login'>
       <main className='flex min-h-screen items-center justify-center'>
         <Card className='mx-auto w-full max-w-md'>
           <CardHeader className='text-center'>
