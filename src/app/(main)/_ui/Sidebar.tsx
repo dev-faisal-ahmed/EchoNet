@@ -23,7 +23,7 @@ export function Sidebar({ className }: IProps) {
   return (
     <aside
       className={cn(
-        'sticky top-0 grid h-screen w-full max-w-[240px] grid-rows-[auto_1fr_auto] overflow-x-hidden border-r p-6',
+        'sticky top-0 grid h-screen w-full max-w-[240px] grid-rows-[auto_1fr_auto] border-r p-6',
         className,
       )}
     >
@@ -44,14 +44,13 @@ export function Sidebar({ className }: IProps) {
         ))}
       </div>
       <div className='border-t pt-4'>
-        <div className='flex gap-3'>
+        <div className='grid grid-cols-[auto_1fr] gap-3'>
           <div>
             <ProfileIcon name={user?.name as string} />
           </div>
-
-          <div className='flex-1'>
+          <div>
             <h3 className='text-sm font-semibold'>{user?.name}</h3>
-            <p className='mt-1 line-clamp-1 text-xs text-muted-foreground'>
+            <p className='mt-1 line-clamp-1 break-all text-xs text-muted-foreground'>
               {user?.email}
             </p>
           </div>
