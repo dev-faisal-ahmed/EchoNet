@@ -3,10 +3,12 @@ export interface IChatLink {
   user1: {
     id: string;
     name: string;
+    email: string;
   };
   user2: {
     id: string;
     name: string;
+    email: string;
   };
   messages: {
     body: string;

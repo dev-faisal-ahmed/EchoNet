@@ -19,6 +19,7 @@ export const INSERT_NOTIFICATION = `
         name
         email
       }
+      createdAt
     }
   }
 `;
