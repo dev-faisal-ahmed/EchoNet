@@ -1,6 +1,8 @@
 import { GET_CHAT_ROOM_INFO, INSERT_NOTIFICATION } from '@/lib/queries';
 import { ENotificationType, IChatLink } from '@/lib/types';
 import { graphQlServerConnector } from '@/helpers';
+import { friendTemplate } from '@/helpers/email/templates';
+import { sendEmail } from '@/helpers/email';
 
 export async function POST(request: Request) {
   try {
@@ -25,6 +27,23 @@ export async function POST(request: Request) {
         const responseData = response.data.insert_notifications_one;
         if (!responseData)
           throw new Error('Failed to insert into notification table');
+
+        // sending email
+        const senderName = responseData?.invoker?.name;
+        const receiverEmail = responseData?.receiver?.email;
+        const message = friendTemplate({
+          senderName,
+          message: 'sent you a friend request',
+        });
+
+        const emailResponse = await sendEmail({
+          email: receiverEmail,
+          subject: 'EchoNet : Friend Request Notification',
+          messageInHTML: message,
+          messageInText: `${senderName} sent you a friend request`,
+        });
+
+        if (!emailResponse.error) throw new Error(emailResponse.error);
       }
 
       if (status === 'ACCEPTED') {
