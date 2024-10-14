@@ -1,3 +1,4 @@
+import { scheduleDeletePostAction } from './scheduleDeletePostAction';
 import { queryClient } from '@/providers/QueryClient';
 import { deletePost } from '@/helpers/data-fetching';
 import { useMutation } from '@tanstack/react-query';
@@ -20,6 +21,13 @@ export const useDeletePost = () => {
       tryFn: async () => {
         const response = await deletePostMutation.mutateAsync(postId);
         if (!response?.id) throw new Error('Failed to delete the post');
+
+        await scheduleDeletePostAction(
+          postId,
+          new Date(new Date().getTime() + 2 * 60 * 1000),
+          // setting event after two minutes for testing purpose
+        );
+
         toast.success('Post deleted successfully', { id });
         setIsDialogOpen(false);
       },

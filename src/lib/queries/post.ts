@@ -56,6 +56,14 @@ export const RESTORE_POST = `
   }
 `;
 
+export const DELETE_POST_PERMANENTLY_EVENT = `
+  mutation DeletePostPermanently($postId: uuid!) {
+    delete_posts(where: {id: {_eq: $postId}, isDeleted: {_eq: true}}) {
+      affected_rows
+    }
+  }
+`;
+
 // queries
 export const GET_POSTS = `
   query GetPosts {
