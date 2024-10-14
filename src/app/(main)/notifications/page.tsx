@@ -21,18 +21,15 @@ export default function NotificationsPage() {
 
   return (
     <PageTitle title='Notifications'>
-      <main className='mx-auto flex w-full max-w-md flex-col gap-4'>
+      <main className='mx-auto flex w-full max-w-2xl flex-col gap-4'>
         <h3 className='text-lg font-semibold'>Notifications.</h3>
         {notifications?.map(({ id, invoker, type, createdAt }) => (
-          <div
-            className='flex items-center gap-4 rounded-md border bg-background p-4'
-            key={id}
-          >
+          <div className='flex items-center gap-4 border-b p-4' key={id}>
             <div>
               <ProfileIcon name={invoker.name} />
             </div>
-            <div>
-              <p className='text-justify'>
+            <div className='flex flex-1 flex-col gap-2 md:flex-row md:items-center md:gap-6'>
+              <p>
                 <span className='font-semibold'>{invoker.name}</span>{' '}
                 {type === ENotificationType.ACCEPT_REQUEST &&
                   'just accepted your friend request'}
@@ -41,7 +38,7 @@ export default function NotificationsPage() {
                 {type === ENotificationType.MESSAGE &&
                   'just Sent you a message'}
               </p>
-              <p className='mt-2 text-xs text-muted-foreground'>
+              <p className='text-xs text-muted-foreground md:ml-auto'>
                 {getFormattedDate(createdAt)}
               </p>
             </div>
