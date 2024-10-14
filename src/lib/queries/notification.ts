@@ -1,3 +1,4 @@
+// mutations
 export const INSERT_NOTIFICATION = `
   mutation InsertNotification(
     $invokerId: uuid!, 
@@ -20,6 +21,33 @@ export const INSERT_NOTIFICATION = `
         email
       }
       createdAt
+    }
+  }
+`;
+
+// queries
+export const GET_NOTIFICATIONS = `
+  query GetNotification {
+    notifications(order_by: {createdAt: desc}) {
+      id
+      invoker {
+        name
+      }
+      createdAt
+      type
+    }
+  }
+`;
+
+export const GET_NOTIFICATIONS_SUBSCRIPTION = `
+  subscription GetNotification {
+    notifications(order_by: {createdAt: desc}) {
+      id
+      invoker {
+        name
+      }
+      createdAt
+      type
     }
   }
 `;

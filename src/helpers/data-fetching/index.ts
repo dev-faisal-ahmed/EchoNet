@@ -18,3 +18,6 @@ export * from './chat/getChatRoomInfo';
 export * from './chat/getMessages';
 export * from './chat/sendMessage';
 export * from './chat/getMyChats';
+
+// notification
+export * from './notification/getNotifications';
