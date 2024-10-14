@@ -45,6 +45,17 @@ export const DELETE_POST_PERMANENTLY = `
   }
 `;
 
+export const RESTORE_POST = `
+  mutation RestorePost($postId: uuid!) {
+    update_posts_by_pk(
+      pk_columns: {id: $postId},
+      _set: {isDeleted: false}
+    ) {
+      id
+    }
+  }
+`;
+
 // queries
 export const GET_POSTS = `
   query GetPosts {

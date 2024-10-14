@@ -26,7 +26,12 @@ export default function TrashPage() {
         {posts && posts.length > 0 ? (
           <div className='mt-4 flex flex-col gap-6'>
             {posts?.map((post) => (
-              <PostCard key={post.id} post={post} deletePostPermanently />
+              <PostCard
+                key={post.id}
+                post={post}
+                restorePost
+                deletePostPermanently
+              />
             ))}
           </div>
         ) : (

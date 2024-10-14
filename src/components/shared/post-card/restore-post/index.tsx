@@ -11,33 +11,33 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-import { useDeletePostPermanently } from './useDeletePostPermanently';
+import { useRestorePost } from './useRestorePost';
 import { Button } from '@/components/ui/button';
-import { TrashIcon } from 'lucide-react';
+import { RotateCcwIcon } from 'lucide-react';
 
 interface IProps {
   postId: string;
 }
 
-export function DeletePostPermanently({ postId }: IProps) {
+export function RestorePost({ postId }: IProps) {
   const {
     states: { isDialogOpen, setIsDialogOpen },
-    handlers: { handleDeletePostPermanently },
+    handlePostRestore,
     isPending,
-  } = useDeletePostPermanently();
+  } = useRestorePost();
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger>
-        <span className='block cursor-pointer rounded-md bg-red-600 p-2'>
-          <TrashIcon size={18} />
+        <span className='block cursor-pointer rounded-md bg-green-600 p-2'>
+          <RotateCcwIcon size={18} />
         </span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>
           <DialogDescription>
-            Once you delete this post it will be removed forever.
+            Once you restore this post it can be found in the feed page.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -45,11 +45,10 @@ export function DeletePostPermanently({ postId }: IProps) {
             <Button variant='outline'>Cancel</Button>
           </DialogClose>
           <Button
-            onClick={() => handleDeletePostPermanently(postId)}
+            onClick={() => handlePostRestore(postId)}
             disabled={isPending}
-            variant='destructive'
           >
-            {isPending ? 'Deleting...' : 'Delete'}
+            {isPending ? 'Restoring...' : 'Restore'}
           </Button>
         </DialogFooter>
       </DialogContent>

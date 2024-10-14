@@ -1,14 +1,15 @@
 import Image from 'next/image';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { DeletePostPermanently } from './delete-post-permanently';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { GlobeIcon, ShieldCheckIcon } from 'lucide-react';
 import { getFormattedDate } from '@/helpers/dateHelper';
 import { EPostPrivacy, IPost } from '@/lib/types';
+import { RestorePost } from './restore-post';
 import { DeletePost } from './delete-post';
 import { EditPost } from './edit-post';
 import { useGetUser } from '@/hooks';
-import { DeletePostPermanently } from './delete-post-permanently';
 
 interface IProps {
   post: IPost;
@@ -22,6 +23,7 @@ export function PostCard({
   post,
   editPost,
   deletePost,
+  restorePost,
   deletePostPermanently,
 }: IProps) {
   const { email } = useGetUser()!;
@@ -56,6 +58,7 @@ export function PostCard({
               )}
             </>
             {deletePost && <DeletePost postId={id} />}
+            {restorePost && <RestorePost postId={id} />}
             {deletePostPermanently && <DeletePostPermanently postId={id} />}
           </div>
         )}

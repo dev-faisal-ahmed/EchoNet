@@ -47,7 +47,7 @@ export function DeletePost({ postId }: IProps) {
             disabled={isPending}
             variant='destructive'
           >
-            {isPending ? 'Deleting...' : 'Proceed'}
+            {isPending ? 'Deleting...' : 'Delete'}
           </Button>
         </DialogFooter>
       </DialogContent>
