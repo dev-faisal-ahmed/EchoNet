@@ -4,6 +4,7 @@ import {
   UsersIcon,
   BellIcon,
   UserIcon,
+  TrashIcon,
 } from 'lucide-react';
 
 export const sidebarLinks = [
@@ -16,4 +17,5 @@ export const sidebarLinks = [
     icon: <BellIcon size={20} />,
     url: '/notifications',
   },
+  { title: 'Trash', icon: <TrashIcon size={20} />, url: '/trash' },
 ];

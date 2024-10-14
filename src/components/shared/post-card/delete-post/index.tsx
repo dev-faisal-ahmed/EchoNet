@@ -9,7 +9,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 
-import { useDeletePost } from '../_lib/useDeletePost';
+import { useDeletePost } from './useDeletePost';
 import { Button } from '@/components/ui/button';
 import { TrashIcon } from 'lucide-react';
 

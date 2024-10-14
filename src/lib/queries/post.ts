@@ -1,3 +1,4 @@
+// mutations
 export const ADD_POST = `
   mutation AddPost(
     $body: String!
@@ -8,22 +9,6 @@ export const ADD_POST = `
       object: { body: $body, imageUrl: $imageUrl, privacy: $privacy }
     ) {
       id
-    }
-  }
-`;
-
-export const GET_POSTS = `
-  query GetPosts {
-    posts(where: { isDeleted: { _eq: false } }, order_by: { createdAt: desc }) {
-      id
-      body
-      createdAt
-      imageUrl
-      privacy
-      creator {
-        name
-        email
-      }
     }
   }
 `;
@@ -48,6 +33,68 @@ export const DELETE_POST = `
   mutation DeletePost($id: uuid!) {
     update_posts_by_pk(pk_columns: { id: $id }, _set: { isDeleted: true }) {
       id
+    }
+  }
+`;
+
+// queries
+export const GET_POSTS = `
+  query GetPosts {
+    posts(where: { isDeleted: { _eq: false } }, order_by: { createdAt: desc }) {
+      id
+      body
+      createdAt
+      imageUrl
+      privacy
+      creator {
+        name
+        email
+      }
+    }
+  }
+`;
+
+export const GET_DELETED_POST = `
+  query GetDeletedPost($userId: uuid!) {
+    posts(
+      where: {
+        creatorId: {_eq: $userId}, 
+        isDeleted: {_eq: true}
+      }, 
+      order_by: {createdAt: desc}
+    ) {
+      id
+      body
+      createdAt
+      imageUrl
+      privacy
+      creator {
+        name
+        email
+      }
+    }
+  }
+`;
+
+// subscription
+export const GET_DELETED_POST_SUBSCRIPTION = `
+  subscription GetDeletedPost($userId: uuid!) {
+    posts(
+      where: {
+        creatorId: {_eq: $userId}, 
+        isDeleted: {_eq: true}
+      }, 
+      order_by: {createdAt: desc}
+    ) {
+      id
+      body
+      createdAt
+      imageUrl
+      privacy
+      creator {
+        name
+        email
+      }
     }
   }
 `;
