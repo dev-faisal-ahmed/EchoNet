@@ -1,4 +1,5 @@
 // post
+export * from './post/deletePostPermanently';
 export * from './post/getDeletedPosts';
 export * from './post/deletePost';
 export * from './post/editPost';

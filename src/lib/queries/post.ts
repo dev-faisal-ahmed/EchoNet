@@ -37,6 +37,14 @@ export const DELETE_POST = `
   }
 `;
 
+export const DELETE_POST_PERMANENTLY = `
+  mutation DeletePostPermanently($postId: uuid!) {
+    delete_posts_by_pk(id: $postId) {
+      id
+    }
+  }
+`;
+
 // queries
 export const GET_POSTS = `
   query GetPosts {

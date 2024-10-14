@@ -8,6 +8,7 @@ import { EPostPrivacy, IPost } from '@/lib/types';
 import { DeletePost } from './delete-post';
 import { EditPost } from './edit-post';
 import { useGetUser } from '@/hooks';
+import { DeletePostPermanently } from './delete-post-permanently';
 
 interface IProps {
   post: IPost;
@@ -17,7 +18,12 @@ interface IProps {
   deletePostPermanently?: boolean;
 }
 
-export function PostCard({ post, editPost, deletePost }: IProps) {
+export function PostCard({
+  post,
+  editPost,
+  deletePost,
+  deletePostPermanently,
+}: IProps) {
   const { email } = useGetUser()!;
   const { id, body, imageUrl, creator, privacy, createdAt } = post;
 
@@ -50,6 +56,7 @@ export function PostCard({ post, editPost, deletePost }: IProps) {
               )}
             </>
             {deletePost && <DeletePost postId={id} />}
+            {deletePostPermanently && <DeletePostPermanently postId={id} />}
           </div>
         )}
       </CardHeader>

@@ -1,15 +1,15 @@
 import {
   Dialog,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogClose,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 
-import { useDeletePost } from './useDeletePost';
+import { useDeletePostPermanently } from './useDeletePostPermanently';
 import { Button } from '@/components/ui/button';
 import { TrashIcon } from 'lucide-react';
 
@@ -17,12 +17,12 @@ interface IProps {
   postId: string;
 }
 
-export function DeletePost({ postId }: IProps) {
+export function DeletePostPermanently({ postId }: IProps) {
   const {
     states: { isDialogOpen, setIsDialogOpen },
-    handleDeletePost,
+    handlers: { handleDeletePostPermanently },
     isPending,
-  } = useDeletePost();
+  } = useDeletePostPermanently();
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -43,7 +43,7 @@ export function DeletePost({ postId }: IProps) {
             <Button variant='outline'>Cancel</Button>
           </DialogClose>
           <Button
-            onClick={() => handleDeletePost(postId)}
+            onClick={() => handleDeletePostPermanently(postId)}
             disabled={isPending}
             variant='destructive'
           >

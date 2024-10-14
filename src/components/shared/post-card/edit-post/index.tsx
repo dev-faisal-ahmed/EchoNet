@@ -34,9 +34,9 @@ export function EditPost({
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-        <span className='cursor-pointer'>
-          <SquarePenIcon size={20} />
+      <DialogTrigger>
+        <span className='block cursor-pointer rounded-md bg-primary p-2'>
+          <SquarePenIcon size={18} />
         </span>
       </DialogTrigger>
       <DialogContent className='max-w-lg'>
