@@ -66,8 +66,12 @@ export const DELETE_POST_PERMANENTLY_EVENT = `
 
 // queries
 export const GET_POSTS = `
-  query GetPosts {
-    posts(where: { isDeleted: { _eq: false } }, order_by: { createdAt: desc }) {
+  query GetPosts($limit: Int!) {
+    posts(
+      where: {isDeleted: {_eq: false}}, 
+      order_by: {createdAt: desc}, 
+      limit: $limit
+    ) {
       id
       body
       createdAt
@@ -76,6 +80,11 @@ export const GET_POSTS = `
       creator {
         name
         email
+      }
+    }
+    posts_aggregate {
+      aggregate {
+        count
       }
     }
   }
