@@ -1,4 +1,28 @@
-// chat room related queries
+// ------------ mutations ------------ \\
+
+// chat room
+export const CREATE_CHAT_ROOM = `
+  mutation CreateChatRoom($user1Id: uuid!, $user2Id: uuid!) {
+    insert_chat_rooms_one(object: { user1Id: $user1Id, user2Id: $user2Id }) {
+      id
+    }
+  }
+`;
+
+// message
+export const SEND_MESSAGE = `
+  mutation SendMessage($chatRoomId: uuid!, $body: String!, $imageUrl: String!) {
+    insert_messages_one(
+      object: { chatRoomId: $chatRoomId, body: $body, imageUrl: $imageUrl }
+    ) {
+      id
+    }
+  }
+`;
+
+// ------------ query ------------ \\
+
+// chat room
 export const CHAT_ROOM_EXISTS = `
   query FindChatRoom($user1Id: uuid!, $user2Id: uuid!) {
     chat_rooms(
@@ -9,14 +33,6 @@ export const CHAT_ROOM_EXISTS = `
         ]
       }
     ) {
-      id
-    }
-  }
-`;
-
-export const CREATE_CHAT_ROOM = `
-  mutation CreateChatRoom($user1Id: uuid!, $user2Id: uuid!) {
-    insert_chat_rooms_one(object: { user1Id: $user1Id, user2Id: $user2Id }) {
       id
     }
   }
@@ -66,22 +82,18 @@ export const GET_CHAT_ROOM_INFO = `
   }
 `;
 
-// message related queries
-export const SEND_MESSAGE = `
-  mutation SendMessage($chatRoomId: uuid!, $body: String!, $imageUrl: String!) {
-    insert_messages_one(
-      object: { chatRoomId: $chatRoomId, body: $body, imageUrl: $imageUrl }
-    ) {
-      id
-    }
-  }
-`;
-
+// messages
 export const GET_MESSAGES = `
-  query GetMessages($chatRoomId: uuid!) {
+  query GetMessages(
+    $chatRoomId: uuid!, 
+    $limit: Int!, 
+    $offset: Int!
+  ) {
     messages(
-      where: { chatRoomId: { _eq: $chatRoomId } }
-      order_by: { createdAt: desc }
+      where: {chatRoomId: {_eq: $chatRoomId}}, 
+      order_by: {createdAt: desc}, 
+      limit: $limit, 
+      offset: $offset
     ) {
       id
       body
@@ -92,15 +104,40 @@ export const GET_MESSAGES = `
       }
       createdAt
     }
+      
+    messages_aggregate(
+      where: {chatRoomId: {_eq: $chatRoomId}}
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+// this query will be used to get total messages count
+export const GET_MESSAGE_COUNT = `
+  query GetMessagesCount($chatRoomId: uuid!) {
+    messages_aggregate(where: {chatRoomId: {_eq: $chatRoomId}}) {
+      aggregate {
+        count
+      }
+    }
   }
 `;
 
 // subscriptions
 export const GET_MESSAGES_SUBSCRIPTION = `
-  subscription GetMessages($chatRoomId: uuid!) {
+  subscription GetMessages(
+    $chatRoomId: uuid!, 
+    $limit: Int!, 
+    $offset: Int!
+  ) {
     messages(
-      where: { chatRoomId: { _eq: $chatRoomId } }
-      order_by: { createdAt: desc }
+      where: {chatRoomId: {_eq: $chatRoomId}}, 
+      order_by: {createdAt: desc}, 
+      limit: $limit, 
+      offset: $offset
     ) {
       id
       body
