@@ -8,6 +8,7 @@ import { getFormattedDate } from '@/helpers/dateHelper';
 import { useQuery } from '@tanstack/react-query';
 import { ENotificationType } from '@/lib/types';
 import { TAGS } from '@/data';
+import { NotificationLoader } from './_ui/NotificationLoader';
 
 export default function NotificationsPage() {
   const { data: notifications, isLoading } = useQuery({
@@ -17,7 +18,7 @@ export default function NotificationsPage() {
 
   useGetNotificationSubscription();
 
-  if (isLoading) return 'Loading';
+  if (1) return <NotificationLoader />;
 
   return (
     <PageTitle title='Notifications'>
