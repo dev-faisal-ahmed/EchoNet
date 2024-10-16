@@ -1,48 +1,28 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 import { getPosts } from '@/helpers/data-fetching';
-import { useQuery } from '@tanstack/react-query';
 import { TAGS } from '@/data';
-
-const INTERVAL = 5;
+import { useEffect } from 'react';
 
 export const useLazyPosts = () => {
-  const [limit, setLimit] = useState(INTERVAL);
-
   const {
-    data: postResponse,
-    isLoading,
-    isFetching,
-  } = useQuery({
-    queryFn: () => getPosts(limit),
-    queryKey: [TAGS.POSTS, limit],
+    data: allPages,
+    error,
+    status,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [TAGS.POSTS],
+    queryFn: ({ pageParam }) => getPosts({ pageParam }),
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: 0,
   });
 
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  const lastElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (isLoading || isFetching) return;
-      if (observerRef.current) observerRef.current.disconnect();
-
-      observerRef.current = new IntersectionObserver((entries) => {
-        if (
-          entries[0].isIntersecting &&
-          (postResponse?.posts_aggregate.aggregate.count || 0) > limit
-        ) {
-          setLimit((prevLimit) => prevLimit + INTERVAL);
-        }
-      });
-
-      if (node) observerRef.current.observe(node);
-    },
-    [isLoading, isFetching, postResponse, limit],
-  );
+  const { ref: observerRef, inView } = useInView();
 
   useEffect(() => {
-    return () => {
-      if (observerRef.current) observerRef.current.disconnect();
-    };
-  }, []);
+    if (inView) fetchNextPage();
+  }, [inView, fetchNextPage]);
 
-  return { postResponse, isLoading, lastElementRef };
+  return { allPages, status, error, observerRef, isFetchingNextPage };
 };

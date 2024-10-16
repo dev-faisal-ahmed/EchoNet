@@ -1,10 +1,34 @@
-import { ILazyPostResponse } from '@/lib/types/post';
 import { graphQlClient } from '../../axios-client';
 import { GET_POSTS } from '@/lib/queries';
+import { IPost } from '@/lib/types';
 
-export const getPosts = async (limit: number): Promise<ILazyPostResponse> => {
+interface IResponse {
+  data: IPost[];
+  currentPage: number;
+  nextPage: number | null;
+}
+
+interface IArgs {
+  pageParam: number;
+}
+
+const LIMIT = 10;
+
+export const getPosts = async ({ pageParam }: IArgs): Promise<IResponse> => {
   const response = await graphQlClient(GET_POSTS, {
-    limit,
+    limit: LIMIT,
+    offset: pageParam,
   });
-  return response?.data;
+
+  if (!response?.data)
+    return { data: [], currentPage: pageParam, nextPage: null };
+
+  const totalPosts = response.data.posts_aggregate?.aggregate?.count;
+  const posts = response.data.posts;
+
+  return {
+    data: posts || [],
+    currentPage: pageParam,
+    nextPage: totalPosts > pageParam + LIMIT ? pageParam + LIMIT : null,
+  };
 };

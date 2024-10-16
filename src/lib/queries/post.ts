@@ -66,11 +66,12 @@ export const DELETE_POST_PERMANENTLY_EVENT = `
 
 // queries
 export const GET_POSTS = `
-  query GetPosts($limit: Int!) {
+  query GetPosts($limit: Int!, $offset: Int!) {
     posts(
       where: {isDeleted: {_eq: false}}, 
       order_by: {createdAt: desc}, 
-      limit: $limit
+      limit: $limit, 
+      offset: $offset
     ) {
       id
       body

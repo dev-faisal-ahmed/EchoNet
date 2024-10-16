@@ -12,11 +12,4 @@ export interface IPost {
   creator: { name: string; email: string };
 }
 
-export interface ILazyPostResponse {
-  posts: IPost[];
-  posts_aggregate: {
-    aggregate: {
-      count: number;
-    };
-  };
-}
+
