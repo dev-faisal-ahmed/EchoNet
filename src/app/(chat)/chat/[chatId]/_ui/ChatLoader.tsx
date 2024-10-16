@@ -10,20 +10,8 @@ export function ChatLoader() {
         <Skeleton className='h-16 w-16 rounded-full' />
         <Skeleton className='h-12 w-40' />
       </div>
-      <div className='flex h-full flex-col overflow-y-auto pr-2'>
-        <div className='mt-auto flex flex-col gap-6'>
-          {[...Array(2)].map((_, index) => (
-            <>
-              <div className='flex gap-4'>
-                <Skeleton className='h-8 w-8 rounded-full' />
-                <Skeleton className='h-20 w-1/2' />
-              </div>
-              <Skeleton className='ml-auto h-28 w-1/2' />
-            </>
-          ))}
-        </div>
-      </div>
-      <Skeleton className='mt-8 h-12 w-full' />
+      <div />
+      <Skeleton className='mt-16 h-12 w-full' />
     </main>
   );
 }

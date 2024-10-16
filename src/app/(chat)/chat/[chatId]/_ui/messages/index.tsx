@@ -4,10 +4,10 @@ import { getMessages } from '@/helpers/data-fetching';
 import { useGetMessagesSubscription } from '@/hooks';
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { MessageLoader } from './MeassageLoader';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { MessageCard } from './MessageCard';
-import { ChatLoader } from '../ChatLoader';
 import { TAGS } from '@/data';
 
 export function Messages() {
@@ -26,7 +26,7 @@ export function Messages() {
     endMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [data]);
 
-  if (isLoading) return <ChatLoader />;
+  if (isLoading) return <MessageLoader />;
 
   return (
     <div className='my-4 flex flex-col-reverse gap-4'>

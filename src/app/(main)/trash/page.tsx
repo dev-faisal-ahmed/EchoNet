@@ -5,6 +5,7 @@ import { PageTitle } from '@/components/shared/PageTitle';
 import { getDeletedPosts } from '@/helpers/data-fetching';
 import { PostCard } from '@/components/shared/post-card';
 import { useQuery } from '@tanstack/react-query';
+import { TrashLoader } from './_ui/TrashLoader';
 import { useGetUser } from '@/hooks';
 import { TAGS } from '@/data';
 
@@ -17,7 +18,7 @@ export default function TrashPage() {
 
   useGetDeletedPostSubscription();
 
-  if (isLoading) return 'Loading';
+  if (isLoading) return <TrashLoader />;
 
   return (
     <PageTitle title='Trash'>

@@ -1,5 +1,6 @@
 'use client';
 
+import { NotificationLoader } from './_ui/NotificationLoader';
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { getNotifications } from '@/helpers/data-fetching';
 import { PageTitle } from '@/components/shared/PageTitle';
@@ -8,7 +9,6 @@ import { getFormattedDate } from '@/helpers/dateHelper';
 import { useQuery } from '@tanstack/react-query';
 import { ENotificationType } from '@/lib/types';
 import { TAGS } from '@/data';
-import { NotificationLoader } from './_ui/NotificationLoader';
 
 export default function NotificationsPage() {
   const { data: notifications, isLoading } = useQuery({
@@ -18,7 +18,7 @@ export default function NotificationsPage() {
 
   useGetNotificationSubscription();
 
-  if (1) return <NotificationLoader />;
+  if (isLoading) return <NotificationLoader />;
 
   return (
     <PageTitle title='Notifications'>
