@@ -6,6 +6,7 @@ import { ChatSidebar } from './_ui/chat-sidebar';
 import { ChatTopbar } from './_ui/chat-topbar';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { Loader } from '@/components/shared/Loader';
 
 export default function ChatLayout({ children }: PropsWithChildren) {
   const session = useSession();
@@ -18,7 +19,13 @@ export default function ChatLayout({ children }: PropsWithChildren) {
   useGetChatRoomSubscription();
 
   // to prevent showing the page before the session is loaded
-  if (session.status !== 'authenticated') return 'Loading';
+  if (session.status !== 'authenticated')
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <Loader size={120} />
+      </div>
+    );
+
   return (
     <main className='flex'>
       <ChatSidebar />

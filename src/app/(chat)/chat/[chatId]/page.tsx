@@ -5,6 +5,7 @@ import { PageTitle } from '@/components/shared/PageTitle';
 import { getChatRoomInfo } from '@/helpers/data-fetching';
 import { useQuery } from '@tanstack/react-query';
 import { SendMessage } from './_ui/SendMessage';
+import { ChatLoader } from './_ui/ChatLoader';
 import { useParams } from 'next/navigation';
 import { Messages } from './_ui/messages';
 import { useGetUser } from '@/hooks';
@@ -23,7 +24,7 @@ export default function ConversationPage() {
       ? chatRoomInfo?.user2
       : chatRoomInfo?.user1;
 
-  if (isLoading) return 'Loading';
+  if (isLoading) return <ChatLoader />;
 
   if (!chatRoomInfo) return <p>Invalid Chat id</p>;
 

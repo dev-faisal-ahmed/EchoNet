@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { MessageCard } from './MessageCard';
+import { ChatLoader } from '../ChatLoader';
 import { TAGS } from '@/data';
 
 export function Messages() {
@@ -25,7 +26,7 @@ export function Messages() {
     endMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [data]);
 
-  if (isLoading) return 'loading';
+  if (isLoading) return <ChatLoader />;
 
   return (
     <div className='my-4 flex flex-col-reverse gap-4'>

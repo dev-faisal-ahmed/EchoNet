@@ -17,6 +17,7 @@ import {
 import { ProfileIcon } from '@/components/shared/ProfileIcon';
 import { AlignJustifyIcon, LogOutIcon } from 'lucide-react';
 import { useGetChatRooms } from '@/hooks/data-fetching';
+import { ChatTopbarLoader } from './ChatTopbarLoader';
 import { ChatTopbarLink } from './ChatTopbarLink';
 import { Logo } from '@/components/shared/Logo';
 import { Button } from '@/components/ui/button';
@@ -27,7 +28,7 @@ export function ChatTopbar() {
   const user = useGetUser();
   const { chats, isLoading } = useGetChatRooms();
 
-  if (isLoading) return 'Loading';
+  if (isLoading) return <ChatTopbarLoader />;
 
   return (
     <nav className='mb-6 flex w-full items-center gap-4 md:hidden'>
@@ -43,7 +44,7 @@ export function ChatTopbar() {
               <Logo />
             </SheetTitle>
           </SheetHeader>
-          <div className='mt-4 h-full max-h-[90vh] overflow-y-auto'>
+          <div className='mt-4 flex h-full max-h-[90vh] flex-col gap-3 overflow-y-auto'>
             {chats?.map((chat) => <ChatTopbarLink key={chat.id} chat={chat} />)}
           </div>
         </SheetContent>
