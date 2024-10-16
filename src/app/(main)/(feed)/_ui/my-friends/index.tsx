@@ -1,12 +1,13 @@
 'use client';
 
+import { MyFriendLoader } from './MyFriendLoader';
 import { MyFriendCard } from './MyFriendCard';
 import { useGetMyFriends } from '@/hooks';
 
 export function MyFriends() {
   const { friends, isPending } = useGetMyFriends();
 
-  if (isPending) return '';
+  if (isPending) return <MyFriendLoader />;
 
   return (
     <section className='hidden w-full max-w-xs lg:block'>

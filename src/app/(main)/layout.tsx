@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithChildren, useEffect } from 'react';
-import { SidebarLoader } from './_ui/SidebarLoader';
+import { Loader } from '@/components/shared/Loader';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Sidebar } from './_ui/Sidebar';
@@ -16,7 +16,12 @@ export default function MainLayout({ children }: PropsWithChildren) {
   }, [session.status, router]);
 
   // to prevent showing the page before the session is loaded
-  if (session.status !== 'authenticated') return <SidebarLoader />;
+  if (session.status !== 'authenticated')
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <Loader size={120} />
+      </div>
+    );
 
   return (
     <main className='flex'>
