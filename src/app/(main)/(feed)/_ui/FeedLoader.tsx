@@ -1,9 +1,10 @@
 import { Skeleton } from '@/components/ui/skeleton';
+import { MyFriendLoader } from './my-friends/MyFriendLoader';
 
 export const FeedLoader = () => {
   return (
-    <section className='w-full'>
-      <div className='mx-auto mt-8 flex max-w-2xl flex-col gap-6 rounded-md'>
+    <section className='flex w-full items-center'>
+      <div className='mx-auto mt-8 flex w-full max-w-2xl flex-col gap-6 rounded-md'>
         {[...Array(2)].map((_, index) => (
           <Skeleton key={index} className='p-6'>
             <div className='flex gap-4'>
@@ -17,6 +18,7 @@ export const FeedLoader = () => {
           </Skeleton>
         ))}
       </div>
+      <MyFriendLoader />
     </section>
   );
 };

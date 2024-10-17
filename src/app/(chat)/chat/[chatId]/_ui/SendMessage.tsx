@@ -49,6 +49,7 @@ export function SendMessage({ chatId }: IProps) {
               <PlusIcon size={20} />
             </label>
             <input
+              autoComplete='off'
               ref={imageRef}
               onChange={onImageChange}
               id='chat-image'
