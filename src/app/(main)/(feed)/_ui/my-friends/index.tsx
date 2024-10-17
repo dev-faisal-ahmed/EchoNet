@@ -10,7 +10,10 @@ export function MyFriends() {
   if (isPending) return <MyFriendLoader />;
 
   return (
-    <section className='hidden w-full max-w-xs lg:block'>
+    <section
+      style={{ height: `calc(100dvh - 24px)` }}
+      className='sticky right-0 top-6 hidden w-full max-w-xs overflow-y-auto lg:block'
+    >
       <h3 className='mb-6 pl-4 font-semibold'>Chats.</h3>
       {friends?.length ? (
         <div className='flex flex-col gap-4'>
