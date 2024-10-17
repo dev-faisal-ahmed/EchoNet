@@ -44,7 +44,10 @@ export function ChatTopbar() {
               <Logo />
             </SheetTitle>
           </SheetHeader>
-          <div className='mt-4 flex h-full max-h-[90vh] flex-col gap-3 overflow-y-auto'>
+          <div
+            style={{ height: 'calc(100dvh - 100px)' }}
+            className='mt-4 flex h-full flex-col gap-3 overflow-y-auto'
+          >
             {chats?.map((chat) => <ChatTopbarLink key={chat.id} chat={chat} />)}
           </div>
         </SheetContent>

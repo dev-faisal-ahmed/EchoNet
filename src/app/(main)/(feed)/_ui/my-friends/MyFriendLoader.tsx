@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export function MyFriendLoader() {
   return (
-    <div className='flex w-full max-w-xs flex-col gap-4'>
+    <div className='hidden w-full max-w-xs flex-col gap-4 md:flex'>
       <Skeleton className='h-6 w-32' />
       {[...Array(3)].map((_, index) => (
         <Skeleton key={index} className='p-6'>
