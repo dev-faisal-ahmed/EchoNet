@@ -24,8 +24,7 @@ export const useDeletePost = () => {
 
         await scheduleDeletePostAction(
           postId,
-          new Date(new Date().getTime() + 2 * 60 * 1000),
-          // setting event after two minutes for testing purpose
+          new Date(new Date().getTime() + 24 * 3600 * 1000),
         );
 
         toast.success('Post deleted successfully', { id });
